@@ -11,33 +11,36 @@
   
   <style>
     :root {
-      --pcu-sapphire: ##0F52BA;
+      /* SAPPHIRE BLUE THEME */
+      --pcu-sapphire: #0F52BA;
+      --pcu-dark-sapphire: #0A3A85;
       --pcu-gold: #D4AF37;
-      --pcu-blue: #004080;
+      --pcu-light-bg: #F0F4FA;
     }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #0b1a2a;
+      background-color: var(--pcu-dark-sapphire);
       overflow-x: hidden;
     }
 
-    /* 1. PCU OFFICIAL NAVBAR */
+    /* 1. PCU NAVBAR WITH SAPPHIRE BLUE */
     .pcu-navbar {
-      background-color: rgba(0, 34, 68, 0.95);
+      background-color: var(--pcu-sapphire);
       border-bottom: 3px solid var(--pcu-gold);
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
-      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    .pcu-logo-png {
+    .pcu-logo-img {
       height: 48px;
       width: auto;
+      object-fit: contain;
     }
 
     .nav-links a {
@@ -56,7 +59,7 @@
     /* 2. LANDING PAGE / HERO SECTION */
     .hero-section {
       height: 100vh;
-      background: linear-gradient(rgba(0, 34, 68, 0.65), rgba(0, 34, 68, 0.75)), 
+      background: linear-gradient(rgba(15, 82, 186, 0.75), rgba(10, 58, 133, 0.85)), 
                   url('https://pcudasmarias.edu.ph/wp-content/uploads/2022/10/pcu-building.jpg') center/cover no-repeat;
       display: flex;
       flex-direction: column;
@@ -80,8 +83,20 @@
       font-size: 1.15rem;
       max-width: 800px;
       margin-top: 20px;
-      opacity: 0.9;
+      opacity: 0.95;
       line-height: 1.6;
+    }
+
+    /* SAPPHIRE BUTTONS */
+    .btn-sapphire {
+      background-color: var(--pcu-sapphire);
+      color: white;
+      border: 2px solid var(--pcu-gold);
+    }
+
+    .btn-sapphire:hover {
+      background-color: var(--pcu-dark-sapphire);
+      color: white;
     }
 
     /* DEMO TAP FLOATING BUTTON */
@@ -96,19 +111,19 @@
       font-weight: 700;
     }
 
-    /* 3. CLINIC PORTAL OVERLAY (SLIDES IN WHEN TAPPED) */
+    /* 3. CLINIC PORTAL OVERLAY */
     .clinic-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(11, 26, 42, 0.92);
+      background: rgba(10, 58, 133, 0.94);
       backdrop-filter: blur(10px);
       z-index: 1500;
       display: none; /* Hidden by default */
       overflow-y: auto;
-      padding-top: 80px;
+      padding-top: 85px;
       animation: fadeIn 0.4s ease-in-out;
     }
 
@@ -117,7 +132,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* CARD STYLING INSIDE OVERLAY */
+    /* CARDS INSIDE OVERLAY */
     .card-pcu {
       border: none;
       border-radius: 15px;
@@ -126,33 +141,39 @@
     }
 
     .card-header-pcu {
-      background-color: var(--pcu-navy);
+      background-color: var(--pcu-sapphire);
       color: #ffffff;
       font-weight: 700;
       border-radius: 15px 15px 0 0 !important;
       padding: 14px 20px;
     }
 
+    .nav-tabs .nav-link.active {
+      background-color: var(--pcu-sapphire) !important;
+      color: white !important;
+    }
+
     .student-avatar {
       width: 110px;
       height: 110px;
-      background-color: #eef2f5;
+      background-color: var(--pcu-light-bg);
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--pcu-navy);
+      color: var(--pcu-sapphire);
       border: 4px solid var(--pcu-gold);
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. MAIN PCU WEBSITE NAVBAR -->
+  <!-- 1. MAIN PCU NAVBAR (SAPPHIRE BLUE #0F52BA) -->
   <nav class="pcu-navbar py-2 px-4">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center gap-3">
-        <img src="pcu-logo-png.png" alt="PCU Logo" class="pcu-logo-img" onerror="this.src='https://pcudasmarias.edu.ph/wp-content/uploads/2022/10/pcu-logo.png'">
+        <!-- WHITE VERSION LOGO FILENAME -->
+        <img src="pcu-logo.png" alt="PCU White Logo" class="pcu-logo-img" onerror="this.src='pcu-logo-png.png'">
         <div>
           <div class="text-white fw-bold text-uppercase fs-5 lh-1">Philippine Christian University</div>
           <small class="text-warning fw-semibold">Cavite Campus</small>
@@ -181,7 +202,7 @@
     </p>
 
     <div class="mt-4 d-flex gap-3">
-      <button class="btn btn-primary btn-lg px-4 rounded-pill fw-bold">Get Started</button>
+      <button class="btn btn-sapphire btn-lg px-4 rounded-pill fw-bold">Get Started</button>
       <button class="btn btn-outline-light btn-lg px-4 rounded-pill fw-bold">Enroll Now</button>
     </div>
   </section>
@@ -191,7 +212,7 @@
     <i class="fa-solid fa-id-card me-2"></i> [DEMO] Tap RFID Card
   </button>
 
-  <!-- 3. CLINIC STUDENT PORTAL OVERLAY (APPEARS ON RFID TAP) -->
+  <!-- 3. CLINIC STUDENT PORTAL OVERLAY (SAPPHIRE THEME) -->
   <div id="clinicOverlay" class="clinic-overlay">
     <div class="container pb-5">
       
@@ -319,19 +340,16 @@
   <script>
     let autoCloseTimer;
 
-    // FUNCTION TO TRIGGER WHEN RFID CARD IS TAPPED
     function triggerRfidTap() {
       const overlay = document.getElementById('clinicOverlay');
       overlay.style.display = 'block';
 
-      // Auto-hide portal after 20 seconds of no interaction to return to PCU Main Website
       clearTimeout(autoCloseTimer);
       autoCloseTimer = setTimeout(() => {
         closeClinicPortal();
       }, 20000);
     }
 
-    // FUNCTION TO CLOSE CLINIC PORTAL
     function closeClinicPortal() {
       document.getElementById('clinicOverlay').style.display = 'none';
     }
