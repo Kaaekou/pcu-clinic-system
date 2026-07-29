@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -172,8 +172,9 @@
   <nav class="pcu-navbar py-2 px-4">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center gap-3">
-        <!-- WHITE VERSION LOGO FILENAME -->
-        <img src="pcu-logo.png" alt="PCU White Logo" class="pcu-logo-img" onerror="this.src='pcu-logo-png.png'">
+        <!-- AUTOMATIC FALLBACK LOGO DETECTOR -->
+        <img src="pcu-logo.jpeg" alt="PCU Logo" class="pcu-logo-img" 
+             onerror="this.onerror=null; this.src='pcu-logo-png.png';">
         <div>
           <div class="text-white fw-bold text-uppercase fs-5 lh-1">Philippine Christian University</div>
           <small class="text-warning fw-semibold">Cavite Campus</small>
