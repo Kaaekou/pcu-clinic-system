@@ -3,59 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCU Clinic RFID Portal</title>
+  <title>Philippine Christian University - Clinic Portal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --pcu-blue: #002B66;
-      --pcu-gold: #FFC72C;
-      --pcu-light: #F4F7FA;
+      --pcu-navy: #002244;
+      --pcu-blue: #004080;
+      --pcu-gold: #D4AF37;
+      --pcu-light: #f8f9fa;
     }
-    body { background-color: var(--pcu-light); font-family: 'Segoe UI', Tahoma, sans-serif; }
-    .navbar-pcu { background-color: var(--pcu-blue); border-bottom: 4px solid var(--pcu-gold); color: white; }
-    .card-pcu { border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-    .card-header-pcu { background-color: var(--pcu-blue); color: white; font-weight: 600; border-radius: 12px 12px 0 0 !important; }
-    .nav-tabs .nav-link.active { background-color: var(--pcu-blue); color: white; font-weight: bold; }
-    .nav-tabs .nav-link { color: var(--pcu-blue); font-weight: 600; }
+    body { background-color: #eef2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    
+    /* PCU OFFICIAL NAVBAR STYLE */
+    .pcu-header {
+      background-color: var(--pcu-navy);
+      color: white;
+      border-bottom: 4px solid var(--pcu-gold);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .pcu-logo-text h5 { margin: 0; font-weight: 700; letter-spacing: 0.5px; }
+    .pcu-logo-text small { font-size: 0.75rem; color: #cbd5e1; }
+    
+    /* CARDS & COMPONENTS */
+    .card-pcu { border: none; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .card-header-pcu {
+      background-color: var(--pcu-blue);
+      color: white;
+      font-weight: 600;
+      border-radius: 10px 10px 0 0 !important;
+    }
+    
+    /* TAB DESIGN */
+    .nav-tabs .nav-link { color: var(--pcu-navy); font-weight: 600; }
+    .nav-tabs .nav-link.active {
+      background-color: var(--pcu-navy);
+      color: white !important;
+      border-color: var(--pcu-navy);
+    }
   </style>
 </head>
 <body>
 
-  <!-- HEADER / LOGOS -->
-  <nav class="navbar navbar-pcu px-4 py-2 mb-4">
+  <!-- OFFICIAL PCU STYLE NAVBAR -->
+  <header class="pcu-header py-2 px-4 mb-4">
     <div class="container-fluid d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center gap-2">
-        <h4 class="mb-0 fw-bold text-white"><i class="fa-solid fa-hospital-user text-warning me-2"></i>PCU SHS CLINIC PORTAL</h4>
+      <div class="d-flex align-items-center gap-3">
+        <!-- PCU Seal Icon Placeholder -->
+        <div class="bg-light text-dark rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px; border: 2px solid var(--pcu-gold);">
+          PCU
+        </div>
+        <div class="pcu-logo-text">
+          <h5 class="text-uppercase mb-0">Philippine Christian University</h5>
+          <small class="text-warning">Cavite Campus — Senior High School Clinic Portal</small>
+        </div>
       </div>
-      <div>
+      <div class="d-none d-md-block text-end">
         <span class="badge bg-warning text-dark me-2"><i class="fa-solid fa-user-nurse me-1"></i> Duty: Nurse Jane Cruz</span>
-        <span class="badge bg-success"><i class="fa-solid fa-wifi me-1"></i> Reader Online</span>
+        <span class="badge bg-success"><i class="fa-solid fa-wifi me-1"></i> RFID Online</span>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <div class="container">
+  <!-- MAIN CONTAINER -->
+  <div class="container pb-5">
     <div class="row g-4">
       
       <!-- STUDENT PROFILE CARD -->
       <div class="col-md-4">
         <div class="card card-pcu">
-          <div class="card-header card-header-pcu"><i class="fa-solid fa-id-card me-2"></i>Student Tapped Info</div>
+          <div class="card-header card-header-pcu text-center">
+            <i class="fa-solid fa-id-card me-2"></i>Student Tapped Profile
+          </div>
           <div class="card-body text-center">
-            <div class="mb-3">
-              <i class="fa-solid fa-user-circle fa-5x text-secondary"></i>
+            <div class="my-3">
+              <i class="fa-solid fa-circle-user fa-6x text-secondary"></i>
             </div>
-            <h4 class="fw-bold text-navy mb-0">Maria L. Santos</h4>
-            <span class="badge bg-primary my-2">STEM 12 - St. Thomas</span>
+            <h4 class="fw-bold text-dark mb-0">Maria L. Santos</h4>
+            <span class="badge bg-primary my-2 px-3 py-2">STEM 12 - St. Thomas</span>
             
             <hr>
             
-            <div class="text-start fs-6">
-              <p class="mb-1"><strong>Student ID:</strong> 2023-00102</p>
-              <p class="mb-1"><strong>Sex / Age:</strong> Female / 17 yrs old</p>
-              <p class="mb-1"><strong>Blood Type:</strong> <span class="badge bg-danger">O+</span></p>
-              <p class="mb-1"><strong>Emergency Contact:</strong> 0917-123-4567</p>
+            <div class="text-start fs-6 px-2">
+              <p class="mb-2"><strong>Student ID:</strong> <span class="text-primary">2023-00102</span></p>
+              <p class="mb-2"><strong>Sex / Age:</strong> Female / 17 yrs old</p>
+              <p class="mb-2"><strong>Blood Type:</strong> <span class="badge bg-danger">O+</span></p>
+              <p class="mb-2"><strong>Emergency Contact:</strong> 0917-123-4567</p>
             </div>
           </div>
         </div>
@@ -66,38 +99,45 @@
         <div class="card card-pcu p-3">
           
           <!-- TAB HEADERS -->
-          <ul class="nav nav-tabs" id="clinicTabs" role="tablist">
+          <ul class="nav nav-tabs nav-fill mb-3" id="clinicTabs" role="tablist">
             <li class="nav-item">
-              <button class="nav-link active" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs" type="button"><i class="fa-solid fa-file-pdf me-1"></i> Medical Certs / PDFs</button>
+              <button class="nav-link active" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs" type="button">
+                <i class="fa-solid fa-file-pdf text-danger me-1"></i> Medical Certs / PDFs
+              </button>
             </li>
             <li class="nav-item">
-              <button class="nav-link" id="visits-tab" data-bs-toggle="tab" data-bs-target="#visits" type="button"><i class="fa-solid fa-notes-medical me-1"></i> Clinic Visit Records</button>
+              <button class="nav-link" id="visits-tab" data-bs-toggle="tab" data-bs-target="#visits" type="button">
+                <i class="fa-solid fa-notes-medical text-primary me-1"></i> Clinic Visit Records
+              </button>
             </li>
             <li class="nav-item">
-              <button class="nav-link" id="meds-tab" data-bs-toggle="tab" data-bs-target="#meds" type="button"><i class="fa-solid fa-pills me-1"></i> Ongoing Meds</button>
+              <button class="nav-link" id="meds-tab" data-bs-toggle="tab" data-bs-target="#meds" type="button">
+                <i class="fa-solid fa-pills text-warning me-1"></i> Ongoing Meds
+              </button>
             </li>
           </ul>
 
           <!-- TAB CONTENT -->
-          <div class="tab-content pt-3">
+          <div class="tab-content">
             
             <!-- TAB 1: EXTERNAL DOCTOR PDFS -->
             <div class="tab-pane fade show active" id="docs">
-              <h6 class="fw-bold text-secondary">External Doctor Diagnosis & Prescriptions</h6>
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+              <h6 class="fw-bold text-secondary mb-3">External Doctor Diagnosis & Prescriptions</h6>
+              <div class="list-group">
+                <div class="list-group-item d-flex justify-content-between align-items-center">
                   <div>
-                    <strong>Severe Peanut Allergy Diagnosis.pdf</strong>
-                    <br><small class="text-muted">Uploaded: July 15, 2026 by Parent</small>
+                    <i class="fa-solid fa-file-pdf text-danger fa-2x me-2 align-middle"></i>
+                    <span class="fw-bold">Severe Peanut Allergy Diagnosis.pdf</span>
+                    <br><small class="text-muted ms-4">Uploaded: July 15, 2026 by Parent</small>
                   </div>
                   <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-eye me-1"></i>View PDF</button>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
 
-            <!-- TAB 2: CLINIC VISITS & ACTIONS TAKEN -->
+            <!-- TAB 2: CLINIC VISITS -->
             <div class="tab-pane fade" id="visits">
-              <h6 class="fw-bold text-secondary">In-School Clinic Treatment Logs</h6>
+              <h6 class="fw-bold text-secondary mb-3">In-School Clinic Treatment Logs</h6>
               <div class="table-responsive">
                 <table class="table table-bordered align-middle">
                   <thead class="table-light">
@@ -120,10 +160,10 @@
               </div>
             </div>
 
-            <!-- TAB 3: DAILY/MAINTENANCE MEDS -->
+            <!-- TAB 3: ONGOING MEDS -->
             <div class="tab-pane fade" id="meds">
-              <h6 class="fw-bold text-secondary">Student Maintenance / Required Daily Medications</h6>
-              <div class="alert alert-warning">
+              <h6 class="fw-bold text-secondary mb-3">Student Maintenance / Required Daily Medications</h6>
+              <div class="alert alert-warning border-0 shadow-sm">
                 <i class="fa-solid fa-triangle-exclamation me-2"></i>
                 <strong>Asthma Maintenance:</strong> Salbutamol Inhaler (1-2 puffs before P.E. or during shortness of breath).
               </div>
@@ -139,5 +179,4 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-                        </html>
-                        
+</html>
