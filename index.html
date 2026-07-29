@@ -3,55 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Philippine Christian University - Senior High School Clinic Portal</title>
+  <title>Philippine Christian University - Dasmariñas, Cavite</title>
   
-  <!-- Bootstrap 5 CSS & FontAwesome Icons -->
+  <!-- Bootstrap 5 & FontAwesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     :root {
       --pcu-navy: #002244;
-      --pcu-blue: #004080;
       --pcu-gold: #D4AF37;
-      --pcu-bg: #f4f6f9;
+      --pcu-blue: #004080;
     }
 
     body {
-      background-color: var(--pcu-bg);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0b1a2a;
+      overflow-x: hidden;
     }
 
-    /* OFFICIAL PCU HEADER */
+    /* 1. PCU OFFICIAL NAVBAR */
     .pcu-navbar {
-      background-color: var(--pcu-navy);
-      border-bottom: 5px solid var(--pcu-gold);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background-color: rgba(0, 34, 68, 0.95);
+      border-bottom: 3px solid var(--pcu-gold);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
     }
 
     .pcu-logo-img {
-      height: 55px;
+      height: 48px;
       width: auto;
-      object-fit: contain;
     }
 
-    .pcu-header-title {
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-left: 20px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--pcu-gold);
+    }
+
+    /* 2. LANDING PAGE / HERO SECTION */
+    .hero-section {
+      height: 100vh;
+      background: linear-gradient(rgba(0, 34, 68, 0.65), rgba(0, 34, 68, 0.75)), 
+                  url('https://pcudasmarias.edu.ph/wp-content/uploads/2022/10/pcu-building.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: 3.2rem;
       font-weight: 800;
-      letter-spacing: 0.5px;
-      font-size: 1.25rem;
+      text-shadow: 2px 4px 10px rgba(0,0,0,0.6);
+      max-width: 900px;
+      line-height: 1.2;
     }
 
-    .pcu-header-subtitle {
-      color: #f1c40f;
-      font-size: 0.82rem;
-      font-weight: 600;
+    .hero-subtitle {
+      font-size: 1.15rem;
+      max-width: 800px;
+      margin-top: 20px;
+      opacity: 0.9;
+      line-height: 1.6;
     }
 
-    /* CARDS & UI COMPONENTS */
+    /* DEMO TAP FLOATING BUTTON */
+    .tap-demo-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 2000;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      border-radius: 50px;
+      padding: 12px 24px;
+      font-weight: 700;
+    }
+
+    /* 3. CLINIC PORTAL OVERLAY (SLIDES IN WHEN TAPPED) */
+    .clinic-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(11, 26, 42, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 1500;
+      display: none; /* Hidden by default */
+      overflow-y: auto;
+      padding-top: 80px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CARD STYLING INSIDE OVERLAY */
     .card-pcu {
       border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       background: #ffffff;
     }
 
@@ -59,195 +129,212 @@
       background-color: var(--pcu-navy);
       color: #ffffff;
       font-weight: 700;
-      border-radius: 12px 12px 0 0 !important;
-      padding: 12px 20px;
-    }
-
-    /* NAV TABS STYLING */
-    .nav-tabs {
-      border-bottom: 2px solid #dee2e6;
-    }
-
-    .nav-tabs .nav-link {
-      color: var(--pcu-navy);
-      font-weight: 600;
-      border: none;
-      padding: 10px 18px;
-    }
-
-    .nav-tabs .nav-link.active {
-      background-color: var(--pcu-navy);
-      color: #ffffff !important;
-      border-radius: 8px 8px 0 0;
+      border-radius: 15px 15px 0 0 !important;
+      padding: 14px 20px;
     }
 
     .student-avatar {
       width: 110px;
       height: 110px;
-      background-color: #e9ecef;
+      background-color: #eef2f5;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       color: var(--pcu-navy);
-      border: 3px solid var(--pcu-gold);
+      border: 4px solid var(--pcu-gold);
     }
   </style>
 </head>
 <body>
 
-  <!-- PCU HEADER NAVBAR -->
-  <header class="pcu-navbar py-2 px-3 px-md-4 mb-4">
+  <!-- 1. MAIN PCU WEBSITE NAVBAR -->
+  <nav class="pcu-navbar py-2 px-4">
     <div class="container-fluid d-flex justify-content-between align-items-center">
-      
-      <!-- LOGO & TITLE SECTION -->
       <div class="d-flex align-items-center gap-3">
-        <img src="pcu-logo-png.png" alt="PCU Seal" class="pcu-logo-img" onerror="this.style.display='none'">
-        
+        <img src="pcu-logo-png.png" alt="PCU Logo" class="pcu-logo-img" onerror="this.src='https://pcudasmarias.edu.ph/wp-content/uploads/2022/10/pcu-logo.png'">
         <div>
-          <div class="pcu-header-title text-white text-uppercase">Philippine Christian University</div>
-          <div class="pcu-header-subtitle">Cavite Campus — Senior High School Clinic Portal</div>
+          <div class="text-white fw-bold text-uppercase fs-5 lh-1">Philippine Christian University</div>
+          <small class="text-warning fw-semibold">Cavite Campus</small>
         </div>
       </div>
-
-      <!-- STATUS BADGES -->
-      <div class="d-none d-md-block text-end">
-        <span class="badge bg-warning text-dark me-2 py-2 px-3">
-          <i class="fa-solid fa-user-nurse me-1"></i> Duty: Nurse Jane Sapad
-        </span>
-        <span class="badge bg-success py-2 px-3">
-          <i class="fa-solid fa-wifi me-1"></i> RFID Online
-        </span>
-      </div>
-
-    </div>
-  </header>
-
-  <!-- MAIN PORTAL CONTAINER -->
-  <div class="container pb-5">
-    <div class="row g-4">
       
-      <!-- LEFT COLUMN: STUDENT PROFILE -->
-      <div class="col-lg-4">
-        <div class="card card-pcu">
-          <div class="card-header card-header-pcu text-center">
-            <i class="fa-solid fa-id-card me-2"></i>Student Tapped Profile
-          </div>
-          <div class="card-body text-center p-4">
-            
-            <div class="student-avatar mb-3">
-              <i class="fa-solid fa-user fa-4x"></i>
-            </div>
-            
-            <h4 class="fw-bold text-dark mb-1">Chris David Valdez</h4>
-            <span class="badge bg-primary px-3 py-2 fs-6 mb-3">STEM 12 - Zacchaeus</span>
-            
-            <hr class="my-3">
-            
-            <div class="text-start fs-6 lh-lg px-2">
-              <div><strong>Student ID:</strong> <span class="text-primary fw-bold">2023-00102</span></div>
-              <div><strong>Sex / Age:</strong> Male / 17 yrs old</div>
-              <div><strong>Blood Type:</strong> <span class="badge bg-danger">AB+</span></div>
-              <div><strong>Emergency Contact:</strong> 0917-123-4567</div>
-            </div>
+      <!-- NAV MENU LINKS -->
+      <div class="nav-links d-none d-lg-block">
+        <a href="#">Homepage</a>
+        <a href="#">About Us</a>
+        <a href="#">Non-Academics</a>
+        <a href="#">Offices</a>
+        <a href="#">Campus Life</a>
+        <a href="#">E-portals</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </nav>
 
-          </div>
+  <!-- 2. DEFAULT MAIN WEBSITE LANDING PAGE VIEW -->
+  <section class="hero-section">
+    <h1 class="hero-title">Unlock your potential and shape your future at PCUD</h1>
+    <p class="hero-subtitle">
+      Our commitment to academic excellence, personal development, and community engagement 
+      provides a transformative education experience that prepares students for success in their chosen fields and beyond.
+    </p>
+
+    <div class="mt-4 d-flex gap-3">
+      <button class="btn btn-primary btn-lg px-4 rounded-pill fw-bold">Get Started</button>
+      <button class="btn btn-outline-light btn-lg px-4 rounded-pill fw-bold">Enroll Now</button>
+    </div>
+  </section>
+
+  <!-- DEMO FLOATING BUTTON (SIMULATES RFID TAP) -->
+  <button class="btn btn-warning btn-lg tap-demo-btn" onclick="triggerRfidTap()">
+    <i class="fa-solid fa-id-card me-2"></i> [DEMO] Tap RFID Card
+  </button>
+
+  <!-- 3. CLINIC STUDENT PORTAL OVERLAY (APPEARS ON RFID TAP) -->
+  <div id="clinicOverlay" class="clinic-overlay">
+    <div class="container pb-5">
+      
+      <!-- TOP STATUS BANNER -->
+      <div class="d-flex justify-content-between align-items-center text-white mb-4 bg-dark bg-opacity-50 p-3 rounded-4 border border-warning">
+        <div class="d-flex align-items-center gap-2">
+          <span class="spinner-grow spinner-grow-sm text-success"></span>
+          <h5 class="mb-0 text-warning fw-bold"><i class="fa-solid fa-house-medical me-2"></i>Senior High School Clinic Portal</h5>
+        </div>
+        <div>
+          <span class="badge bg-success me-2"><i class="fa-solid fa-wifi"></i> RFID Active</span>
+          <button class="btn btn-sm btn-outline-light rounded-circle ms-3" onclick="closeClinicPortal()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: MEDICAL RECORDS TABS -->
-      <div class="col-lg-8">
-        <div class="card card-pcu p-3 p-md-4">
-          
-          <!-- TABS NAVIGATION -->
-          <ul class="nav nav-tabs nav-fill mb-4" id="clinicTabs" role="tablist">
-            <li class="nav-item">
-              <button class="nav-link active" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs" type="button">
-                <i class="fa-solid fa-file-pdf text-danger me-2"></i>Medical Certs / PDFs
-              </button>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link" id="visits-tab" data-bs-toggle="tab" data-bs-target="#visits" type="button">
-                <i class="fa-solid fa-notes-medical text-primary me-2"></i>Clinic Visit Records
-              </button>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link" id="meds-tab" data-bs-toggle="tab" data-bs-target="#meds" type="button">
-                <i class="fa-solid fa-pills text-warning me-2"></i>Ongoing Meds
-              </button>
-            </li>
-          </ul>
+      <div class="row g-4">
+        <!-- LEFT COLUMN: STUDENT PROFILE -->
+        <div class="col-lg-4">
+          <div class="card card-pcu">
+            <div class="card-header card-header-pcu text-center">
+              <i class="fa-solid fa-id-card me-2"></i>Student Tapped Profile
+            </div>
+            <div class="card-body text-center p-4">
+              <div class="student-avatar mb-3">
+                <i class="fa-solid fa-user fa-4x"></i>
+              </div>
+              <h4 class="fw-bold text-dark mb-1" id="studentName">Chris David Valdez</h4>
+              <span class="badge bg-primary px-3 py-2 fs-6 mb-3" id="studentStrand">STEM 12 - St. Thomas</span>
+              <hr class="my-3">
+              <div class="text-start fs-6 lh-lg px-2 text-dark">
+                <div><strong>Student ID:</strong> <span class="text-primary fw-bold" id="studentId">2023-00102</span></div>
+                <div><strong>Sex / Age:</strong> <span id="studentAge">Male / 17 yrs old</span></div>
+                <div><strong>Blood Type:</strong> <span class="badge bg-danger">O+</span></div>
+                <div><strong>Emergency Contact:</strong> <span id="studentContact">0917-123-4567</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <!-- TABS CONTENT -->
-          <div class="tab-content">
-            
-            <!-- TAB 1: PDF DIAGNOSIS -->
-            <div class="tab-pane fade show active" id="docs">
-              <h6 class="fw-bold text-secondary mb-3">External Doctor Diagnosis & Prescriptions</h6>
-              
-              <div class="card border border-light-subtle shadow-sm p-3">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center gap-3">
-                    <i class="fa-solid fa-file-pdf text-danger fa-3x"></i>
-                    <div>
-                      <div class="fw-bold fs-6">Severe Peanut Allergy Diagnosis.pdf</div>
-                      <small class="text-muted">Uploaded: July 15, 2026 by Parent</small>
+        <!-- RIGHT COLUMN: MEDICAL RECORDS TABS -->
+        <div class="col-lg-8">
+          <div class="card card-pcu p-4">
+            <ul class="nav nav-tabs nav-fill mb-4" id="clinicTabs" role="tablist">
+              <li class="nav-item">
+                <button class="nav-link active fw-bold text-dark" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs" type="button">
+                  <i class="fa-solid fa-file-pdf text-danger me-2"></i>Medical Certs / PDFs
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link fw-bold text-dark" id="visits-tab" data-bs-toggle="tab" data-bs-target="#visits" type="button">
+                  <i class="fa-solid fa-notes-medical text-primary me-2"></i>Clinic Visit Records
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link fw-bold text-dark" id="meds-tab" data-bs-toggle="tab" data-bs-target="#meds" type="button">
+                  <i class="fa-solid fa-pills text-warning me-2"></i>Ongoing Meds
+                </button>
+              </li>
+            </ul>
+
+            <div class="tab-content text-dark">
+              <!-- TAB 1: PDF DIAGNOSIS -->
+              <div class="tab-pane fade show active" id="docs">
+                <h6 class="fw-bold text-secondary mb-3">External Doctor Diagnosis & Prescriptions</h6>
+                <div class="card border p-3 shadow-sm">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                      <i class="fa-solid fa-file-pdf text-danger fa-3x"></i>
+                      <div>
+                        <div class="fw-bold fs-6">Severe Peanut Allergy Diagnosis.pdf</div>
+                        <small class="text-muted">Uploaded: July 15, 2026 by Parent</small>
+                      </div>
                     </div>
+                    <button class="btn btn-outline-primary btn-sm px-3"><i class="fa-solid fa-eye me-1"></i> View PDF</button>
                   </div>
-                  <button class="btn btn-outline-primary btn-sm px-3">
-                    <i class="fa-solid fa-eye me-1"></i> View PDF
-                  </button>
                 </div>
               </div>
-            </div>
 
-            <!-- TAB 2: VISIT LOGS -->
-            <div class="tab-pane fade" id="visits">
-              <h6 class="fw-bold text-secondary mb-3">In-School Clinic Treatment Logs</h6>
-              
-              <div class="table-responsive">
-                <table class="table table-bordered align-middle">
-                  <thead class="table-light">
-                    <tr>
-                      <th>Date / Time</th>
-                      <th>Attending Nurse</th>
-                      <th>Condition / Complaint</th>
-                      <th>Action Taken</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>July 29, 2026 - 10:30 AM</td>
-                      <td>Nurse Jane Sapad</td>
-                      <td>Severe Headache</td>
-                      <td>Rested 30 mins, Paracetamol 500mg given</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <!-- TAB 2: VISIT LOGS -->
+              <div class="tab-pane fade" id="visits">
+                <h6 class="fw-bold text-secondary mb-3">In-School Clinic Treatment Logs</h6>
+                <div class="table-responsive">
+                  <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Date / Time</th>
+                        <th>Attending Nurse</th>
+                        <th>Complaint</th>
+                        <th>Action Taken</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>July 29, 2026 - 10:30 AM</td>
+                        <td>Nurse Jane Cruz</td>
+                        <td>Severe Headache</td>
+                        <td>Rest 30 mins, Paracetamol given</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
 
-            <!-- TAB 3: ONGOING MEDS -->
-            <div class="tab-pane fade" id="meds">
-              <h6 class="fw-bold text-secondary mb-3">Student Maintenance Medications</h6>
-              
-              <div class="alert alert-warning border-0 shadow-sm d-flex align-items-center gap-3">
-                <i class="fa-solid fa-triangle-exclamation fa-2x text-warning"></i>
-                <div>
-                  <strong>Asthma Maintenance:</strong> Salbutamol Inhaler (1-2 puffs before P.E. class or as needed).
+              <!-- TAB 3: ONGOING MEDS -->
+              <div class="tab-pane fade" id="meds">
+                <h6 class="fw-bold text-secondary mb-3">Student Maintenance Medications</h6>
+                <div class="alert alert-warning border-0 shadow-sm d-flex align-items-center gap-3">
+                  <i class="fa-solid fa-triangle-exclamation fa-2x text-warning"></i>
+                  <div><strong>Asthma Maintenance:</strong> Salbutamol Inhaler (1-2 puffs before P.E. class).</div>
                 </div>
               </div>
             </div>
 
           </div>
-
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
+  <!-- JavaScript Logic -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let autoCloseTimer;
+
+    // FUNCTION TO TRIGGER WHEN RFID CARD IS TAPPED
+    function triggerRfidTap() {
+      const overlay = document.getElementById('clinicOverlay');
+      overlay.style.display = 'block';
+
+      // Auto-hide portal after 20 seconds of no interaction to return to PCU Main Website
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = setTimeout(() => {
+        closeClinicPortal();
+      }, 20000);
+    }
+
+    // FUNCTION TO CLOSE CLINIC PORTAL
+    function closeClinicPortal() {
+      document.getElementById('clinicOverlay').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
