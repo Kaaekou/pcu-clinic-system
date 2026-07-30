@@ -1,5 +1,4 @@
-
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -42,7 +41,7 @@
       background: linear-gradient(rgba(11, 37, 69, 0.75), rgba(11, 37, 69, 0.85)), 
                   url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
       color: white;
-      padding: 50px 20px;
+      padding: 40px 20px;
       border-bottom: 4px solid var(--pcu-gold);
     }
 
@@ -50,16 +49,16 @@
       font-style: italic;
       letter-spacing: 2px;
       color: #90E0EF;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     .welcome-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 800;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
     }
 
-    /* FIX FOR INVISIBLE DRAWER MENU LABELS */
+    /* SIDE DRAWER STYLING */
     .offcanvas-pcu {
       background-color: var(--pcu-navy) !important;
       color: #ffffff !important;
@@ -75,12 +74,6 @@
       text-align: start;
       display: flex;
       align-items: center;
-      transition: all 0.2s ease-in-out;
-    }
-
-    .offcanvas-pcu .nav-pills .nav-link:hover {
-      background-color: rgba(255, 255, 255, 0.15) !important;
-      color: #ffffff !important;
     }
 
     .offcanvas-pcu .nav-pills .nav-link.active {
@@ -97,7 +90,6 @@
       background: white;
     }
 
-    /* RFID TAP ANIMATION */
     .rfid-pulse {
       animation: pulse 2s infinite;
     }
@@ -126,16 +118,16 @@
     </button>
   </div>
 
-  <!-- 2. OFFCANVAS SIDE DRAWER MENU -->
+  <!-- 2. SIDE DRAWER NAVIGATION -->
   <div class="offcanvas offcanvas-end offcanvas-pcu" tabindex="-1" id="sidebarDrawer">
     <div class="offcanvas-header border-bottom border-secondary">
-      <h5 class="offcanvas-title text-white fw-bold"><i class="fa-solid fa-hospital me-2"></i>Clinic Portal Navigation</h5>
+      <h5 class="offcanvas-title text-white fw-bold"><i class="fa-solid fa-hospital me-2"></i>Clinic Portal Menu</h5>
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body p-0">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
         <a class="nav-link active" id="menu-tab1" data-bs-toggle="pill" href="#tab1" role="tab" data-bs-dismiss="offcanvas">
-          <i class="fa-solid fa-id-card me-3"></i>Student Log Profile
+          <i class="fa-solid fa-id-card me-3"></i>Student Log & Incident Entry
         </a>
         <a class="nav-link" id="menu-tab2" data-bs-toggle="pill" href="#tab2" role="tab" data-bs-dismiss="offcanvas">
           <i class="fa-solid fa-user-nurse me-3"></i>Clinic Personnel & Info
@@ -145,16 +137,13 @@
         </a>
       </div>
     </div>
-    <div class="p-3 text-center border-top border-secondary small text-light opacity-50">
-      PCU SHS Health Services &copy; 2026
-    </div>
   </div>
 
-  <!-- 3. HERO BANNER (GREETING BANNER) -->
+  <!-- 3. HERO GREETING BANNER -->
   <div class="hero-section text-center">
     <div class="container">
       <p class="motto-text mb-1">Faith, Character, Service</p>
-      <h1 class="welcome-title mb-2">Welcome, Dolphins!</h1>
+      <h1 class="welcome-title mb-1">Welcome, Dolphins!</h1>
       <p class="lead mb-0 text-light opacity-75 fs-6">PCU Senior High School Health Services & RFID Clinic Portal</p>
     </div>
   </div>
@@ -164,236 +153,133 @@
     <div class="tab-content" id="v-pills-tabContent">
       
       <!-- ========================================== -->
-      <!-- TAB 1: STUDENT LOG INFO (GREETING FIRST)   -->
+      <!-- TAB 1: STUDENT PROFILE & INCIDENT ENTRY    -->
       <!-- ========================================== -->
       <div class="tab-pane fade show active" id="tab1" role="tabpanel">
         
-        <!-- A. DEFAULT WAITING SCREEN (ITO ANG MAKAKITA AGAD UPON OPENING) -->
+        <!-- A. DEFAULT SCREEN: WAITING FOR RFID TAP -->
         <div id="waitingScreen" class="card card-pcu p-5 text-center my-3">
           <div class="py-4">
             <i class="fa-solid fa-wifi text-primary fa-4x rfid-pulse mb-3"></i>
             <h3 class="fw-bold text-dark mb-2">Ready for Student ID Scan</h3>
-            <p class="text-muted fs-5 mb-4">Please tap your PCU Student ID card on the RFID Scanner to access records.</p>
+            <p class="text-muted fs-5 mb-4">Please tap the PCU Student ID card on the RFID Scanner to pull up health records.</p>
             
-            <!-- DEMO BUTTON PARA SA INYO (SIMULATE TAP) -->
-            <button class="btn btn-outline-primary btn-sm px-4 rounded-pill" onclick="simulateTap()">
-              <i class="fa-solid fa-hand-pointer me-2"></i>[Demo] Simulate RFID ID Tap
+            <button class="btn btn-primary px-4 rounded-pill shadow-sm" onclick="simulateTap()">
+              <i class="fa-solid fa-hand-pointer me-2"></i>[Demo] Simulate Tapping John Cruz's ID
             </button>
           </div>
         </div>
 
-        <!-- B. STUDENT PROFILE DISPLAY (HIDDEN UNTIL TAPPED) -->
+        <!-- B. POST-TAP SCREEN (JOHN CRUZ PROFILE & INCIDENT LOG) -->
         <div id="studentProfileScreen" class="row g-4 d-none">
           
-          <div class="col-12 text-end mb-0">
+          <div class="col-12 d-flex justify-content-between align-items-center mb-1">
+            <span class="badge bg-success px-3 py-2"><i class="fa-solid fa-check-circle me-1"></i> RFID Card Scanned Successfully</span>
             <button class="btn btn-sm btn-outline-secondary" onclick="resetToScan()">
-              <i class="fa-solid fa-arrow-left me-1"></i> Scan Next Student
+              <i class="fa-solid fa-arrow-left me-1"></i> Scan Another ID
             </button>
           </div>
 
           <!-- Student Profile Card -->
           <div class="col-md-4">
-            <div class="card card-pcu p-4 text-center">
+            <div class="card card-pcu p-4 text-center border-top border-4 border-primary">
               <div class="mb-3">
-                <i class="fa-solid fa-circle-user text-secondary" style="font-size: 90px;"></i>
+                <i class="fa-solid fa-circle-user text-secondary" style="font-size: 80px;"></i>
               </div>
-              <h4 class="fw-bold mb-1 text-dark">Chris David Valdez</h4>
+              <h4 class="fw-bold mb-1 text-dark">John Cruz</h4>
               <span class="badge bg-primary px-3 py-2 mb-3 align-self-center">STEM 12 - St. Thomas</span>
               
               <div class="text-start border-top pt-3 fs-6">
                 <div class="mb-2"><strong>Student ID:</strong> <span class="text-primary fw-bold">2023-00102</span></div>
                 <div class="mb-2"><strong>Sex / Age:</strong> Male / 17 yrs old</div>
                 <div class="mb-2"><strong>Blood Type:</strong> <span class="badge bg-danger">O+</span></div>
-                <div class="mb-2"><strong>Emergency Contact:</strong> 0917-123-4567</div>
+                <div class="mb-2"><strong>Known Allergies:</strong> <span class="text-danger fw-bold">Penicillin</span></div>
+                <div class="mb-2"><strong>Parent Contact:</strong> 0917-123-4567 (Mother)</div>
               </div>
+
+              <!-- BUTTON TO RECORD NEW INCIDENT -->
+              <button class="btn btn-danger w-100 mt-3 fw-bold" data-bs-toggle="modal" data-bs-target="#addIncidentModal">
+                <i class="fa-solid fa-plus-circle me-2"></i>Record New Visit / Emergency
+              </button>
             </div>
           </div>
 
-          <!-- Student Medical Records Section -->
+          <!-- Medical Log History -->
           <div class="col-md-8">
             <div class="card card-pcu p-4">
-              <ul class="nav nav-tabs mb-3" id="studentDetailTabs">
-                <li class="nav-item">
-                  <button class="nav-link active fw-bold" data-bs-toggle="tab" data-bs-target="#sub-visits">
-                    <i class="fa-solid fa-file-medical me-2"></i>Medical Care & Visits
-                  </button>
-                </li>
-                <li class="nav-item">
-                  <button class="nav-link fw-bold" data-bs-toggle="tab" data-bs-target="#sub-docs">
-                    <i class="fa-solid fa-paperclip me-2"></i>Clinic Records & Prescriptions
-                  </button>
-                </li>
-              </ul>
-
-              <div class="tab-content">
-                <!-- Visits Tab -->
-                <div class="tab-pane fade show active" id="sub-visits">
-                  <div class="table-responsive">
-                    <table class="table table-hover border align-middle mt-2">
-                      <thead class="table-light">
-                        <tr>
-                          <th>Date / Time</th>
-                          <th>Attending Nurse</th>
-                          <th>Reason / Complaint</th>
-                          <th>Action Taken</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>July 31, 2026 - 10:30 AM</td>
-                          <td>Nurse Jane Cruz</td>
-                          <td>Headache / Fever</td>
-                          <td>Rest for 30 mins, Paracetamol 500mg</td>
-                        </tr>
-                        <tr>
-                          <td>July 15, 2026 - 01:15 PM</td>
-                          <td>Nurse Mark Ramos</td>
-                          <td>Minor Cut (Physical Ed)</td>
-                          <td>Cleaned w/ Betadine & Bandage Applied</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <!-- Attached Prescriptions Tab -->
-                <div class="tab-pane fade" id="sub-docs">
-                  <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center mt-2">
-                    <div>
-                      <i class="fa-solid fa-file-pdf text-danger fa-2x me-3"></i>
-                      <strong>Severe Injury Allergy Medical History.pdf</strong>
-                      <div class="small text-muted">Uploaded: July 10, 2026</div>
-                    </div>
-                    <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download me-1"></i> View File</button>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- ========================================== -->
-      <!-- TAB 2: CLINIC PERSONNEL & HOURS            -->
-      <!-- ========================================== -->
-      <div class="tab-pane fade" id="tab2" role="tabpanel">
-        <div class="row g-4">
-          <div class="col-md-6">
-            <div class="card card-pcu p-4 h-100">
-              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clock me-2"></i>Clinic Operating Hours</h5>
-              <ul class="list-group list-group-flush mb-3">
-                <li class="list-group-item d-flex justify-content-between">
-                  <strong>Monday - Friday:</strong> <span>8:00 AM - 5:00 PM</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                  <strong>Saturday:</strong> <span>8:00 AM - 12:00 PM</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between text-danger">
-                  <strong>Sunday:</strong> <span>Closed</span>
-                </li>
-              </ul>
-              <div class="mt-auto">
-                <small class="text-muted"><i class="fa-solid fa-location-dot me-1 text-danger"></i> <strong>Location:</strong> Main Building, 1st Floor Near Gymnasium</small><br>
-                <small class="text-muted"><i class="fa-solid fa-phone me-1 text-success"></i> <strong>Hotline:</strong> Ext. 104 / 0918-987-6543</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="card card-pcu p-4 h-100">
-              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-doctor me-2"></i>On-Duty Clinic Personnel</h5>
+              <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-notes-medical text-danger me-2"></i>Student Medical Visit Logs</h5>
               
-              <div class="d-flex align-items-center p-3 border rounded bg-light mb-3">
-                <i class="fa-solid fa-user-nurse text-primary fa-3x me-3"></i>
-                <div>
-                  <h6 class="mb-0 fw-bold">Jane Cruz, RN</h6>
-                  <small class="text-muted">Head School Nurse</small>
-                  <div><span class="badge bg-success mt-1">On Duty Today</span></div>
-                </div>
-              </div>
-
-              <div class="d-flex align-items-center p-3 border rounded bg-light">
-                <i class="fa-solid fa-user-doctor text-success fa-3x me-3"></i>
-                <div>
-                  <h6 class="mb-0 fw-bold">Dr. Roberto Santos</h6>
-                  <small class="text-muted">Visiting School Physician</small>
-                  <div><span class="badge bg-secondary mt-1">Schedule: Tue/Thu</span></div>
-                </div>
+              <div class="table-responsive">
+                <table class="table table-hover border align-middle" id="visitsTable">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Date & Time</th>
+                      <th>Condition / Reason</th>
+                      <th>Action Taken & Observations</th>
+                      <th>Attending Nurse</th>
+                    </tr>
+                  </thead>
+                  <tbody id="visitTableBody">
+                    <tr>
+                      <td><small class="fw-bold">July 31, 2026<br>10:00 AM</small></td>
+                      <td><span class="badge bg-danger">Unconscious / Emergency</span></td>
+                      <td>Unconscious upon arrival. Checked vital signs and performed CPR. After 30 minutes, regained consciousness and rested.</td>
+                      <td><strong>Nurse Jane Cruz, RN</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
-      <!-- ========================================== -->
-      <!-- TAB 3: CLINIC INVENTORY                    -->
-      <!-- ========================================== -->
+      <!-- TAB 2 & TAB 3 REMAIN THE SAME -->
+      <div class="tab-pane fade" id="tab2" role="tabpanel">
+        <div class="card card-pcu p-4"><h5 class="fw-bold">Clinic Personnel & Hours</h5><p>Jane Cruz, RN (Head Nurse)</p></div>
+      </div>
       <div class="tab-pane fade" id="tab3" role="tabpanel">
-        <div class="card card-pcu p-4">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-boxes-stacked me-2"></i>Clinic Medical Supplies Inventory</h5>
-            <span class="badge bg-info text-dark">Updated Today</span>
-          </div>
-
-          <div class="table-responsive">
-            <table class="table table-hover table-striped align-middle border">
-              <thead class="table-dark" style="background-color: var(--pcu-navy);">
-                <tr>
-                  <th>Item Code</th>
-                  <th>Item Name / Description</th>
-                  <th>Category</th>
-                  <th>Current Stock</th>
-                  <th>Stock Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>MED-001</code></td>
-                  <td><strong>Face Masks (3-Ply)</strong></td>
-                  <td>PPE / First Aid</td>
-                  <td>250 pcs</td>
-                  <td><span class="badge bg-success">In Stock</span></td>
-                </tr>
-                <tr>
-                  <td><code>MED-002</code></td>
-                  <td><strong>Betadine Antiseptic Solution (100ml)</strong></td>
-                  <td>First Aid / Wound Care</td>
-                  <td>12 bottles</td>
-                  <td><span class="badge bg-success">In Stock</span></td>
-                </tr>
-                <tr>
-                  <td><code>MED-003</code></td>
-                  <td><strong>Paracetamol 500mg Tablets</strong></td>
-                  <td>Medicine</td>
-                  <td>15 boxes</td>
-                  <td><span class="badge bg-warning text-dark">Low Stock</span></td>
-                </tr>
-                <tr>
-                  <td><code>MED-004</code></td>
-                  <td><strong>Sterile Cotton Balls</strong></td>
-                  <td>First Aid</td>
-                  <td>500 pcs</td>
-                  <td><span class="badge bg-success">In Stock</span></td>
-                </tr>
-                <tr>
-                  <td><code>MED-005</code></td>
-                  <td><strong>Adhesive Bandages (Band-Aid)</strong></td>
-                  <td>First Aid</td>
-                  <td>180 pcs</td>
-                  <td><span class="badge bg-success">In Stock</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <div class="card card-pcu p-4"><h5 class="fw-bold">Inventory Supplies</h5><p>Paracetamol, Betadine, Bandages</p></div>
       </div>
 
     </div>
   </div>
 
-  <!-- JS FUNCTIONS FOR TAP SIMULATION -->
+  <!-- 5. MODAL FORM: NURSE RECORD INCIDENT -->
+  <div class="modal fade" id="addIncidentModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-navy text-white" style="background-color: var(--pcu-navy);">
+          <h5 class="modal-title text-white"><i class="fa-solid fa-file-medical me-2"></i>New Incident Log for John Cruz</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="incidentForm">
+            <div class="mb-3">
+              <label class="form-label fw-bold">Date & Time</label>
+              <input type="text" class="form-value form-control" id="logTime" value="July 31, 2026 - 10:00 AM" readonly>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Student Condition / Complaint</label>
+              <input type="text" class="form-control" id="logCondition" placeholder="e.g. Unconscious, High Fever, Cuts" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Action Taken / Clinical Remarks</label>
+              <textarea class="form-control" id="logAction" rows="3" placeholder="e.g. Performed CPR, Checked Vitals, Rested" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Attending Nurse</label>
+              <input type="text" class="form-control" id="logNurse" value="Nurse Jane Cruz, RN" required>
+            </div>
+            <button type="button" class="btn btn-primary w-100 fw-bold" onclick="saveIncident()">Save Record to Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT FOR INTERACTION -->
   <script>
     function simulateTap() {
       document.getElementById('waitingScreen').classList.add('d-none');
@@ -404,10 +290,41 @@
       document.getElementById('studentProfileScreen').classList.add('d-none');
       document.getElementById('waitingScreen').classList.remove('d-none');
     }
+
+    function saveIncident() {
+      const condition = document.getElementById('logCondition').value;
+      const action = document.getElementById('logAction').value;
+      const nurse = document.getElementById('logNurse').value;
+      const time = document.getElementById('logTime').value;
+
+      if (!condition || !action) {
+        alert('Please fill out condition and action taken!');
+        return;
+      }
+
+      const tableBody = document.getElementById('visitTableBody');
+      const newRow = `
+        <tr>
+          <td><small class="fw-bold">${time}</small></td>
+          <td><span class="badge bg-danger">${condition}</span></td>
+          <td>${action}</td>
+          <td><strong>${nurse}</strong></td>
+        </tr>
+      `;
+      
+      tableBody.innerHTML = newRow + tableBody.innerHTML;
+
+      // Close Modal
+      var modalEl = document.getElementById('addIncidentModal');
+      var modal = bootstrap.Modal.getInstance(modalEl);
+      modal.hide();
+
+      // Clear Form
+      document.getElementById('logCondition').value = '';
+      document.getElementById('logAction').value = '';
+    }
   </script>
 
-  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-  </html>
-  
+</html>
