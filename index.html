@@ -39,9 +39,9 @@
     .hero-section {
       position: relative;
       background: linear-gradient(rgba(11, 37, 69, 0.75), rgba(11, 37, 69, 0.85)), 
-                  url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
+                  url('pcu-clinic-bg.jpg') center/cover no-repeat;
       color: white;
-      padding: 40px 20px;
+      padding: 45px 20px;
       border-bottom: 4px solid var(--pcu-gold);
     }
 
@@ -74,6 +74,10 @@
       text-align: start;
       display: flex;
       align-items: center;
+    }
+
+    .offcanvas-pcu .nav-pills .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.15) !important;
     }
 
     .offcanvas-pcu .nav-pills .nav-link.active {
@@ -136,6 +140,9 @@
           <i class="fa-solid fa-boxes-stacked me-3"></i>Inventory Management
         </a>
       </div>
+    </div>
+    <div class="p-3 text-center border-top border-secondary small text-light opacity-50">
+      PCU SHS Health Services &copy; 2026
     </div>
   </div>
 
@@ -235,12 +242,128 @@
         </div>
       </div>
 
-      <!-- TAB 2 & TAB 3 REMAIN THE SAME -->
+      <!-- ========================================== -->
+      <!-- TAB 2: CLINIC PERSONNEL & HOURS            -->
+      <!-- ========================================== -->
       <div class="tab-pane fade" id="tab2" role="tabpanel">
-        <div class="card card-pcu p-4"><h5 class="fw-bold">Clinic Personnel & Hours</h5><p>Jane Cruz, RN (Head Nurse)</p></div>
+        <div class="row g-4">
+          <!-- Operating Hours Card -->
+          <div class="col-md-6">
+            <div class="card card-pcu p-4 h-100">
+              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clock me-2"></i>Clinic Hours & Contact</h5>
+              <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <strong>Monday - Friday:</strong> <span class="badge bg-primary">8:00 AM - 5:00 PM</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <strong>Saturday:</strong> <span class="badge bg-secondary">8:00 AM - 12:00 PM</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center text-danger">
+                  <strong>Sunday:</strong> <span class="badge bg-danger">Closed</span>
+                </li>
+              </ul>
+              <div class="mt-auto pt-2 border-top">
+                <small class="text-muted d-block"><i class="fa-solid fa-location-dot me-2 text-danger"></i><strong>Location:</strong> Main Building, 1st Floor Near Gymnasium</small>
+                <small class="text-muted d-block mt-1"><i class="fa-solid fa-phone me-2 text-success"></i><strong>Landline:</strong> Ext. 104 / 0918-987-6543</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- On-Duty Personnel Card -->
+          <div class="col-md-6">
+            <div class="card card-pcu p-4 h-100">
+              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-doctor me-2"></i>On-Duty Clinic Personnel</h5>
+              
+              <div class="d-flex align-items-center p-3 border rounded bg-light mb-3">
+                <i class="fa-solid fa-user-nurse text-primary fa-3x me-3"></i>
+                <div>
+                  <h6 class="mb-0 fw-bold">Jane Cruz, RN</h6>
+                  <small class="text-muted d-block">Head School Nurse</small>
+                  <span class="badge bg-success mt-1">On Duty Today</span>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center p-3 border rounded bg-light">
+                <i class="fa-solid fa-user-doctor text-success fa-3x me-3"></i>
+                <div>
+                  <h6 class="mb-0 fw-bold">Dr. Roberto Santos</h6>
+                  <small class="text-muted d-block">Visiting School Physician</small>
+                  <span class="badge bg-secondary mt-1">Schedule: Tue / Thu</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- ========================================== -->
+      <!-- TAB 3: CLINIC INVENTORY MANAGEMENT        -->
+      <!-- ========================================== -->
       <div class="tab-pane fade" id="tab3" role="tabpanel">
-        <div class="card card-pcu p-4"><h5 class="fw-bold">Inventory Supplies</h5><p>Paracetamol, Betadine, Bandages</p></div>
+        <div class="card card-pcu p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-boxes-stacked me-2"></i>Clinic Medical Inventory & Stock</h5>
+            <span class="badge bg-success">Real-time Tracking</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle border">
+              <thead class="table-dark" style="background-color: var(--pcu-navy);">
+                <tr>
+                  <th>Item Code</th>
+                  <th>Item Name / Description</th>
+                  <th>Category</th>
+                  <th>Current Stock</th>
+                  <th>Stock Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>MED-001</code></td>
+                  <td><strong>Face Masks (3-Ply)</strong></td>
+                  <td>PPE / First Aid</td>
+                  <td>250 pcs</td>
+                  <td><span class="badge bg-success">In Stock</span></td>
+                </tr>
+                <tr>
+                  <td><code>MED-002</code></td>
+                  <td><strong>Betadine Antiseptic Solution (100ml)</strong></td>
+                  <td>First Aid / Wound Care</td>
+                  <td>12 bottles</td>
+                  <td><span class="badge bg-success">In Stock</span></td>
+                </tr>
+                <tr>
+                  <td><code>MED-003</code></td>
+                  <td><strong>Paracetamol 500mg Tablets</strong></td>
+                  <td>Medicine</td>
+                  <td>15 boxes</td>
+                  <td><span class="badge bg-warning text-dark">Low Stock</span></td>
+                </tr>
+                <tr>
+                  <td><code>MED-004</code></td>
+                  <td><strong>Sterile Cotton Balls</strong></td>
+                  <td>First Aid</td>
+                  <td>500 pcs</td>
+                  <td><span class="badge bg-success">In Stock</span></td>
+                </tr>
+                <tr>
+                  <td><code>MED-005</code></td>
+                  <td><strong>Adhesive Bandages (Band-Aid)</strong></td>
+                  <td>First Aid</td>
+                  <td>180 pcs</td>
+                  <td><span class="badge bg-success">In Stock</span></td>
+                </tr>
+                <tr>
+                  <td><code>MED-006</code></td>
+                  <td><strong>Alcohol 70% Isopropyl (500ml)</strong></td>
+                  <td>Sanitation</td>
+                  <td>8 bottles</td>
+                  <td><span class="badge bg-warning text-dark">Low Stock</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -250,7 +373,7 @@
   <div class="modal fade" id="addIncidentModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-navy text-white" style="background-color: var(--pcu-navy);">
+        <div class="modal-header text-white" style="background-color: var(--pcu-navy);">
           <h5 class="modal-title text-white"><i class="fa-solid fa-file-medical me-2"></i>New Incident Log for John Cruz</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
@@ -258,7 +381,7 @@
           <form id="incidentForm">
             <div class="mb-3">
               <label class="form-label fw-bold">Date & Time</label>
-              <input type="text" class="form-value form-control" id="logTime" value="July 31, 2026 - 10:00 AM" readonly>
+              <input type="text" class="form-control" id="logTime" value="July 31, 2026 - 10:00 AM" readonly>
             </div>
             <div class="mb-3">
               <label class="form-label fw-bold">Student Condition / Complaint</label>
@@ -325,6 +448,8 @@
     }
   </script>
 
+  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+                                            </html>
+              
