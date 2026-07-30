@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCU Senior High School - Clinic Portal</title>
+  <title>PCU SHS - Clinic Portal</title>
   
   <!-- Bootstrap 5 CSS & FontAwesome Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,10 +11,11 @@
   
   <style>
     :root {
-      --pcu-sapphire: #0F52BA;
-      --pcu-dark: #0A3A85;
+      --pcu-navy: #0B2545;
+      --pcu-blue: #134074;
+      --pcu-accent: #0077B6;
       --pcu-gold: #D4AF37;
-      --pcu-bg: #f4f7fa;
+      --pcu-bg: #F4F7F6;
     }
 
     body {
@@ -22,178 +23,221 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* PCU NAVBAR */
-    .pcu-navbar {
-      background-color: var(--pcu-sapphire);
-      border-bottom: 4px solid var(--pcu-gold);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    /* TOP NAVBAR */
+    .pcu-topbar {
+      background-color: var(--pcu-navy);
+      color: white;
+      padding: 12px 20px;
     }
 
-    .pcu-logo-img {
-      height: 50px;
+    .pcu-logo {
+      height: 42px;
       width: auto;
-      object-fit: contain;
+    }
+
+    /* HERO BANNER SECTION */
+    .hero-section {
+      position: relative;
+      background: linear-gradient(rgba(11, 37, 69, 0.75), rgba(11, 37, 69, 0.85)), 
+                  url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
+      color: white;
+      padding: 50px 20px;
+      border-bottom: 4px solid var(--pcu-gold);
+    }
+
+    .motto-text {
+      font-style: italic;
+      letter-spacing: 2px;
+      color: #90E0EF;
+      font-size: 1.1rem;
+    }
+
+    .welcome-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* OFFCANVAS DRAWER MENU */
+    .offcanvas-pcu {
+      background-color: var(--pcu-navy);
+      color: white;
+    }
+
+    .offcanvas-pcu .nav-link {
+      color: #E0FBFC;
+      font-size: 1.1rem;
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .offcanvas-pcu .nav-link:hover, 
+    .offcanvas-pcu .nav-link.active {
+      background-color: #ffffff;
+      color: var(--pcu-navy) !important;
+      font-weight: bold;
     }
 
     /* CARD STYLING */
     .card-pcu {
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      background: #ffffff;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+      background: white;
     }
 
-    .card-header-pcu {
-      background-color: var(--pcu-sapphire);
-      color: #ffffff;
-      font-weight: 700;
-      border-radius: 12px 12px 0 0 !important;
-      padding: 12px 20px;
+    .nav-pills .nav-link {
+      color: var(--pcu-navy);
+      font-weight: 600;
+      border-radius: 4px;
     }
 
-    /* NAV TABS */
-    .nav-tabs .nav-link {
-      color: var(--pcu-sapphire);
-      font-weight: 700;
-      padding: 12px 20px;
-      border: none;
-      border-bottom: 3px solid transparent;
-    }
-
-    .nav-tabs .nav-link.active {
-      color: var(--pcu-sapphire) !important;
-      border-bottom: 3px solid var(--pcu-gold) !important;
-      background: transparent;
-    }
-
-    .student-avatar {
-      width: 100px;
-      height: 100px;
-      background-color: #eef2f5;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--pcu-sapphire);
-      border: 3px solid var(--pcu-gold);
+    .nav-pills .nav-link.active {
+      background-color: var(--pcu-navy);
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <!-- PCU SHS NAVBAR -->
-  <nav class="pcu-navbar py-2 px-3 px-md-4 mb-4">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center gap-3">
-        <img src="pcu-logo.jpeg" alt="PCU Logo" class="pcu-logo-img" onerror="this.onerror=null; this.src='pcu-logo-png.png';">
-        <div>
-          <div class="text-white fw-bold text-uppercase fs-5 lh-1">Philippine Christian University</div>
-          <small class="text-warning fw-semibold">Cavite Campus — SHS Health Services Clinic</small>
-        </div>
-      </div>
-      
+  <!-- 1. TOP NAVBAR WITH DRAWER TRIGGER -->
+  <div class="pcu-topbar d-flex justify-content-between align-items-center sticky-top shadow-sm">
+    <div class="d-flex align-items-center gap-3">
+      <img src="pcu-logo.jpeg" alt="PCU Logo" class="pcu-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/40?text=PCU';">
       <div>
-        <span class="badge bg-success py-2 px-3"><i class="fa-solid fa-wifi me-1"></i> RFID Terminal Ready</span>
+        <h6 class="mb-0 fw-bold text-uppercase" style="letter-spacing: 0.5px;">Philippine Christian University</h6>
+        <small style="color: #9DB2BF;">Cavite Campus</small>
       </div>
     </div>
-  </nav>
-
-  <!-- MAIN CONTAINER WITH 3 SCOPED TABS -->
-  <div class="container pb-5">
     
-    <!-- TABS NAVIGATION HEADER -->
-    <ul class="nav nav-tabs mb-4 bg-white rounded-3 shadow-sm px-3 pt-2" id="clinicScopeTabs" role="tablist">
-      <li class="nav-item">
-        <button class="nav-link active" id="tab1-btn" data-bs-toggle="tab" data-bs-target="#tab1" type="button">
-          <i class="fa-solid fa-id-card me-2 text-primary"></i>Tab 1: Student Log Info (Post-Tap)
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="tab2-btn" data-bs-toggle="tab" data-bs-target="#tab2" type="button">
-          <i class="fa-solid fa-user-nurse me-2 text-success"></i>Tab 2: Clinic Personnels & Info
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="tab3-btn" data-bs-toggle="tab" data-bs-target="#tab3" type="button">
-          <i class="fa-solid fa-boxes-packing me-2 text-warning"></i>Tab 3: Clinic Inventory
-        </button>
-      </li>
-    </ul>
+    <!-- MENU TOGGLE BUTTON (DRAWER) -->
+    <button class="btn text-white fs-4 p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarDrawer">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
 
-    <!-- TABS CONTENT AREA -->
-    <div class="tab-content" id="clinicScopeTabsContent">
+  <!-- 2. OFFCANVAS SIDE DRAWER MENU (CANVA SLIDE-OUT MENU MATCH) -->
+  <div class="offcanvas offcanvas-end offcanvas-pcu" tabindex="-1" id="sidebarDrawer">
+    <div class="offcanvas-header border-bottom border-secondary">
+      <h5 class="offcanvas-title text-white fw-bold"><i class="fa-solid fa-hospital me-2"></i>Clinic Portal</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+        <a class="nav-link active" id="menu-tab1" data-bs-toggle="pill" href="#tab1" role="tab" data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-id-card me-3"></i>Student Log Profile
+        </a>
+        <a class="nav-link" id="menu-tab2" data-bs-toggle="pill" href="#tab2" role="tab" data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-user-nurse me-3"></i>Clinic Personnel & Info
+        </a>
+        <a class="nav-link" id="menu-tab3" data-bs-toggle="pill" href="#tab3" role="tab" data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-boxes-stacked me-3"></i>Inventory Management
+        </a>
+      </div>
+    </div>
+    <div class="p-3 text-center border-top border-secondary small text-light opacity-50">
+      PCU SHS Health Services &copy; 2026
+    </div>
+  </div>
+
+  <!-- 3. HERO BANNER -->
+  <div class="hero-section text-center">
+    <div class="container">
+      <p class="motto-text mb-1">Faith, Character, Service</p>
+      <h1 class="welcome-title mb-2">Welcome, Dolphins!</h1>
+      <p class="lead mb-0 text-light opacity-75 fs-6">PCU Senior High School Health Services & RFID Clinic Portal</p>
+    </div>
+  </div>
+
+  <!-- 4. MAIN CONTENT AREA (3 SCOPED TABS) -->
+  <div class="container my-4">
+    <div class="tab-content" id="v-pills-tabContent">
       
       <!-- ========================================== -->
       <!-- TAB 1: STUDENT LOG INFO (POST-TAP DISPLAY) -->
       <!-- ========================================== -->
-      <div class="tab-pane fade show active" id="tab1">
+      <div class="tab-pane fade show active" id="tab1" role="tabpanel">
         <div class="row g-4">
           
-          <!-- STUDENT PROFILE SIDEBAR -->
-          <div class="col-lg-4">
-            <div class="card card-pcu">
-              <div class="card-header card-header-pcu text-center">
-                <i class="fa-solid fa-fingerprint me-2"></i>Scanned Student Info
+          <!-- Student Profile Card -->
+          <div class="col-md-4">
+            <div class="card card-pcu p-4 text-center">
+              <div class="mb-3">
+                <i class="fa-solid fa-circle-user text-secondary" style="font-size: 90px;"></i>
               </div>
-              <div class="card-body text-center p-4">
-                <div class="student-avatar mb-3">
-                  <i class="fa-solid fa-user-graduate fa-3x"></i>
-                </div>
-                <h4 class="fw-bold text-dark mb-1">Chris David Valdez</h4>
-                <span class="badge bg-primary px-3 py-2 mb-3">STEM 12 - St. Thomas</span>
-                
-                <hr>
-                
-                <div class="text-start fs-6 lh-lg px-2 text-dark">
-                  <div><strong>Student ID:</strong> <span class="text-primary fw-bold">2023-00102</span></div>
-                  <div><strong>Age / Sex:</strong> 17 yrs old / Male</div>
-                  <div><strong>Blood Type:</strong> <span class="badge bg-danger">O+</span></div>
-                  <div><strong>Emergency Contact:</strong> 0917-123-4567</div>
-                  <div><strong>Last Tap Time:</strong> <span class="text-success fw-semibold">Just Now</span></div>
-                </div>
+              <h4 class="fw-bold mb-1 text-dark">Chris David Valdez</h4>
+              <span class="badge bg-primary px-3 py-2 mb-3 align-self-center">STEM 12 - St. Thomas</span>
+              
+              <div class="text-start border-top pt-3 fs-6">
+                <div class="mb-2"><strong>Student ID:</strong> <span class="text-primary fw-bold">2023-00102</span></div>
+                <div class="mb-2"><strong>Sex / Age:</strong> Male / 17 yrs old</div>
+                <div class="mb-2"><strong>Blood Type:</strong> <span class="badge bg-danger">O+</span></div>
+                <div class="mb-2"><strong>Emergency Contact:</strong> 0917-123-4567</div>
               </div>
             </div>
           </div>
 
-          <!-- STUDENT MEDICAL LOGS -->
-          <div class="col-lg-8">
+          <!-- Student Medical Records Section -->
+          <div class="col-md-8">
             <div class="card card-pcu p-4">
-              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-notes-medical me-2"></i>Student Medical & Visit History</h5>
-              
-              <div class="alert alert-info border-0 d-flex align-items-center gap-3 mb-4">
-                <i class="fa-solid fa-circle-info fa-2x"></i>
-                <div>
-                  <strong>Active Health Condition:</strong> Mild Asthma. Student carries a Salbutamol Inhaler.
+              <ul class="nav nav-tabs mb-3" id="studentDetailTabs">
+                <li class="nav-item">
+                  <button class="nav-link active fw-bold" data-bs-toggle="tab" data-bs-target="#sub-visits">
+                    <i class="fa-solid fa-file-medical me-2"></i>Medical Care & Visits
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link fw-bold" data-bs-toggle="tab" data-bs-target="#sub-docs">
+                    <i class="fa-solid fa-paperclip me-2"></i>Clinic Records & Prescriptions
+                  </button>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <!-- Visits Tab -->
+                <div class="tab-pane fade show active" id="sub-visits">
+                  <div class="table-responsive">
+                    <table class="table table-hover border align-middle mt-2">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Date / Time</th>
+                          <th>Attending Nurse</th>
+                          <th>Reason / Complaint</th>
+                          <th>Action Taken</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>July 31, 2026 - 10:30 AM</td>
+                          <td>Nurse Jane Cruz</td>
+                          <td>Headache / Fever</td>
+                          <td>Rest for 30 mins, Paracetamol 500mg</td>
+                        </tr>
+                        <tr>
+                          <td>July 15, 2026 - 01:15 PM</td>
+                          <td>Nurse Mark Ramos</td>
+                          <td>Minor Cut (Physical Ed)</td>
+                          <td>Cleaned w/ Betadine & Bandage Applied</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- Attached Prescriptions Tab -->
+                <div class="tab-pane fade" id="sub-docs">
+                  <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center mt-2">
+                    <div>
+                      <i class="fa-solid fa-file-pdf text-danger fa-2x me-3"></i>
+                      <strong>Severe Injury Allergy Medical History.pdf</strong>
+                      <div class="small text-muted">Uploaded: July 10, 2026</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download me-1"></i> View File</button>
+                  </div>
                 </div>
               </div>
 
-              <h6 class="fw-bold text-secondary mb-2">Recent Clinic Visits</h6>
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle">
-                  <thead class="table-light">
-                    <tr>
-                      <th>Date / Time</th>
-                      <th>Attending Nurse</th>
-                      <th>Complaint</th>
-                      <th>Treatment Given</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>July 29, 2026 - 10:30 AM</td>
-                      <td>Nurse Jane Cruz</td>
-                      <td>Headache / Fatigue</td>
-                      <td>Rest for 30 mins, Paracetamol 500mg</td>
-                    </tr>
-                    <tr>
-                      <td>July 10, 2026 - 02:15 PM</td>
-                      <td>Nurse Mark Ramos</td>
-                      <td>Minor Cut on Hand</td>
-                      <td>Cleaned with Betadine, Band-aid applied</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
 
@@ -201,57 +245,54 @@
       </div>
 
       <!-- ========================================== -->
-      <!-- TAB 2: CLINIC PERSONNELS & INFO            -->
+      <!-- TAB 2: CLINIC PERSONNEL & HOURS            -->
       <!-- ========================================== -->
-      <div class="tab-pane fade" id="tab2">
+      <div class="tab-pane fade" id="tab2" role="tabpanel">
         <div class="row g-4">
           
-          <!-- CLINIC HOURS & DETAILS -->
-          <div class="col-md-5">
-            <div class="card card-pcu p-4">
-              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clock me-2"></i>Clinic Hours & Contact</h5>
+          <!-- Clinic Hours -->
+          <div class="col-md-6">
+            <div class="card card-pcu p-4 h-100">
+              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clock me-2"></i>Clinic Operating Hours</h5>
               <ul class="list-group list-group-flush mb-3">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between">
                   <strong>Monday - Friday:</strong> <span>8:00 AM - 5:00 PM</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between">
                   <strong>Saturday:</strong> <span>8:00 AM - 12:00 PM</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center text-danger">
+                <li class="list-group-item d-flex justify-content-between text-danger">
                   <strong>Sunday:</strong> <span>Closed</span>
                 </li>
               </ul>
-              <div>
-                <strong><i class="fa-solid fa-location-dot me-2 text-danger"></i>Location:</strong> Main Building, 1st Floor (Near Gymnasium)<br>
-                <strong><i class="fa-solid fa-phone me-2 text-success"></i>Local Hotline:</strong> Ext. 104 / 0918-987-6543
+              <div class="mt-auto">
+                <small class="text-muted"><i class="fa-solid fa-location-dot me-1 text-danger"></i> <strong>Location:</strong> Main Building, 1st Floor Near Gymnasium</small><br>
+                <small class="text-muted"><i class="fa-solid fa-phone me-1 text-success"></i> <strong>Hotline:</strong> Ext. 104 / 0918-987-6543</small>
               </div>
             </div>
           </div>
 
-          <!-- ON-DUTY PERSONNELS -->
-          <div class="col-md-7">
-            <div class="card card-pcu p-4">
+          <!-- On-Duty Personnel -->
+          <div class="col-md-6">
+            <div class="card card-pcu p-4 h-100">
               <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-doctor me-2"></i>On-Duty Clinic Personnel</h5>
-              <div class="row g-3">
-                
-                <div class="col-sm-6">
-                  <div class="p-3 border rounded-3 bg-light text-center">
-                    <i class="fa-solid fa-user-nurse fa-3x text-primary mb-2"></i>
-                    <h6 class="fw-bold mb-1">Jane Cruz, RN</h6>
-                    <small class="text-muted">Head School Nurse</small>
-                    <div class="mt-2"><span class="badge bg-success">On Duty Today</span></div>
-                  </div>
+              
+              <div class="d-flex align-items-center p-3 border rounded bg-light mb-3">
+                <i class="fa-solid fa-user-nurse text-primary fa-3x me-3"></i>
+                <div>
+                  <h6 class="mb-0 fw-bold">Jane Cruz, RN</h6>
+                  <small class="text-muted">Head School Nurse</small>
+                  <div><span class="badge bg-success mt-1">On Duty Today</span></div>
                 </div>
+              </div>
 
-                <div class="col-sm-6">
-                  <div class="p-3 border rounded-3 bg-light text-center">
-                    <i class="fa-solid fa-user-doctor fa-3x text-success mb-2"></i>
-                    <h6 class="fw-bold mb-1">Dr. Roberto Santos</h6>
-                    <small class="text-muted">Visiting Physician</small>
-                    <div class="mt-2"><span class="badge bg-secondary">Schedule: Tue/Thu</span></div>
-                  </div>
+              <div class="d-flex align-items-center p-3 border rounded bg-light">
+                <i class="fa-solid fa-user-doctor text-success fa-3x me-3"></i>
+                <div>
+                  <h6 class="mb-0 fw-bold">Dr. Roberto Santos</h6>
+                  <small class="text-muted">Visiting School Physician</small>
+                  <div><span class="badge bg-secondary mt-1">Schedule: Tue/Thu</span></div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -260,18 +301,18 @@
       </div>
 
       <!-- ========================================== -->
-      <!-- TAB 3: CLINIC INVENTORY (SUPPLIES TRACKING)-->
+      <!-- TAB 3: CLINIC INVENTORY                    -->
       <!-- ========================================== -->
-      <div class="tab-pane fade" id="tab3">
+      <div class="tab-pane fade" id="tab3" role="tabpanel">
         <div class="card card-pcu p-4">
           <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-boxes-stacked me-2"></i>Clinic Medical Inventory & Stocks</h5>
+            <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-boxes-stacked me-2"></i>Clinic Medical Supplies Inventory</h5>
             <span class="badge bg-info text-dark">Updated Today</span>
           </div>
 
           <div class="table-responsive">
-            <table class="table table-hover table-striped align-middle">
-              <thead class="table-dark" style="background-color: var(--pcu-sapphire);">
+            <table class="table table-hover table-striped align-middle border">
+              <thead class="table-dark" style="background-color: var(--pcu-navy);">
                 <tr>
                   <th>Item Code</th>
                   <th>Item Name / Description</th>
@@ -332,8 +373,7 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
+  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-                                                                        </html>
-                                                                        
+</html>
