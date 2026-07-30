@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCU SHS - Health Services Portal</title>
+  <title>PCU SHS - Clinic Portal</title>
   
   <!-- Bootstrap 5 CSS & FontAwesome Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,6 +13,7 @@
     :root {
       --pcu-navy: #0B2545;
       --pcu-blue: #134074;
+      --pcu-accent: #0077B6;
       --pcu-gold: #D4AF37;
       --pcu-bg: #F4F7F6;
     }
@@ -57,7 +58,7 @@
       text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
     }
 
-    /* SIDE DRAWER NAVIGATION */
+    /* SIDE DRAWER STYLING */
     .offcanvas-pcu {
       background-color: var(--pcu-navy) !important;
       color: #ffffff !important;
@@ -71,6 +72,12 @@
       border-radius: 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       text-align: start;
+      display: flex;
+      align-items: center;
+    }
+
+    .offcanvas-pcu .nav-pills .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.15) !important;
     }
 
     .offcanvas-pcu .nav-pills .nav-link.active {
@@ -82,27 +89,9 @@
     /* CARD STYLING */
     .card-pcu {
       border: 1px solid #E2E8F0;
-      border-radius: 8px;
+      border-radius: 6px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.03);
       background: white;
-    }
-
-    /* STUDENT SUB-TABS */
-    .student-subtabs .nav-link {
-      color: var(--pcu-navy);
-      font-weight: 600;
-      border: 1px solid #dee2e6;
-      margin-bottom: 6px;
-      border-radius: 6px;
-      text-align: left;
-      padding: 10px 15px;
-      background-color: #f8f9fa;
-    }
-
-    .student-subtabs .nav-link.active {
-      background-color: var(--pcu-navy) !important;
-      color: white !important;
-      border-color: var(--pcu-navy);
     }
 
     .rfid-pulse {
@@ -133,7 +122,7 @@
     </button>
   </div>
 
-  <!-- 2. SIDE DRAWER MENU -->
+  <!-- 2. SIDE DRAWER NAVIGATION -->
   <div class="offcanvas offcanvas-end offcanvas-pcu" tabindex="-1" id="sidebarDrawer">
     <div class="offcanvas-header border-bottom border-secondary">
       <h5 class="offcanvas-title text-white fw-bold"><i class="fa-solid fa-hospital me-2"></i>Clinic Portal Menu</h5>
@@ -141,15 +130,15 @@
     </div>
     <div class="offcanvas-body p-0">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-        <button class="nav-link active" id="menu-tab1" data-bs-toggle="pill" data-bs-target="#tab1" type="button" role="tab" data-bs-dismiss="offcanvas">
-          <i class="fa-solid fa-id-card me-3"></i>Student Log & Records
-        </button>
-        <button class="nav-link" id="menu-tab2" data-bs-toggle="pill" data-bs-target="#tab2" type="button" role="tab" data-bs-dismiss="offcanvas">
-          <i class="fa-solid fa-user-nurse me-3"></i>Clinic Personnel & Hours
-        </button>
-        <button class="nav-link" id="menu-tab3" data-bs-toggle="pill" data-bs-target="#tab3" type="button" role="tab" data-bs-dismiss="offcanvas">
+        <a class="nav-link active" id="menu-tab1" data-bs-toggle="pill" href="#tab1" role="tab" data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-id-card me-3"></i>Student Log & Incident Entry
+        </a>
+        <a class="nav-link" id="menu-tab2" data-bs-toggle="pill" href="#tab2" role="tab" data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-user-nurse me-3"></i>Clinic Personnel & Info
+        </a>
+        <a class="nav-link" id="menu-tab3" data-bs-toggle="pill" href="#tab3" role="tab" data-bs-dismiss="offcanvas">
           <i class="fa-solid fa-boxes-stacked me-3"></i>Inventory Management
-        </button>
+        </a>
       </div>
     </div>
     <div class="p-3 text-center border-top border-secondary small text-light opacity-50">
@@ -170,34 +159,36 @@
   <div class="container my-4">
     <div class="tab-content" id="v-pills-tabContent">
       
-      <!-- TAB 1: STUDENT PROFILE & RECORDS -->
+      <!-- ========================================== -->
+      <!-- TAB 1: STUDENT PROFILE & INCIDENT ENTRY    -->
+      <!-- ========================================== -->
       <div class="tab-pane fade show active" id="tab1" role="tabpanel">
         
-        <!-- READY TO SCAN SCREEN -->
+        <!-- A. DEFAULT SCREEN: WAITING FOR RFID TAP -->
         <div id="waitingScreen" class="card card-pcu p-5 text-center my-3">
           <div class="py-4">
             <i class="fa-solid fa-wifi text-primary fa-4x rfid-pulse mb-3"></i>
             <h3 class="fw-bold text-dark mb-2">Ready for Student ID Scan</h3>
             <p class="text-muted fs-5 mb-4">Please tap the PCU Student ID card on the RFID Scanner to pull up health records.</p>
             
-            <button class="btn btn-primary px-4 rounded-pill shadow-sm" id="btnSimulateTap">
+            <button class="btn btn-primary px-4 rounded-pill shadow-sm" onclick="simulateTap()">
               <i class="fa-solid fa-hand-pointer me-2"></i>[Demo] Simulate Tapping John Cruz's ID
             </button>
           </div>
         </div>
 
-        <!-- PROFILE DISPLAY SCREEN -->
+        <!-- B. POST-TAP SCREEN (JOHN CRUZ PROFILE & INCIDENT LOG) -->
         <div id="studentProfileScreen" class="row g-4 d-none">
           
-          <div class="col-12 d-flex justify-content-between align-items-center">
+          <div class="col-12 d-flex justify-content-between align-items-center mb-1">
             <span class="badge bg-success px-3 py-2"><i class="fa-solid fa-check-circle me-1"></i> RFID Card Scanned Successfully</span>
-            <button class="btn btn-sm btn-outline-secondary" id="btnResetScan">
+            <button class="btn btn-sm btn-outline-secondary" onclick="resetToScan()">
               <i class="fa-solid fa-arrow-left me-1"></i> Scan Another ID
             </button>
           </div>
 
-          <!-- Left Info Card -->
-          <div class="col-lg-4">
+          <!-- Student Profile Card -->
+          <div class="col-md-4">
             <div class="card card-pcu p-4 text-center border-top border-4 border-primary">
               <div class="mb-3">
                 <i class="fa-solid fa-circle-user text-secondary" style="font-size: 80px;"></i>
@@ -213,121 +204,53 @@
                 <div class="mb-2"><strong>Parent Contact:</strong> 0917-123-4567 (Mother)</div>
               </div>
 
+              <!-- BUTTON TO RECORD NEW INCIDENT -->
               <button class="btn btn-danger w-100 mt-3 fw-bold" data-bs-toggle="modal" data-bs-target="#addIncidentModal">
                 <i class="fa-solid fa-plus-circle me-2"></i>Record New Visit / Emergency
               </button>
             </div>
           </div>
 
-          <!-- Right Tabbed Records Card -->
-          <div class="col-lg-8">
+          <!-- Medical Log History -->
+          <div class="col-md-8">
             <div class="card card-pcu p-4">
+              <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-notes-medical text-danger me-2"></i>Student Medical Visit Logs</h5>
               
-              <!-- SUB TABS -->
-              <ul class="nav nav-pills student-subtabs mb-3 gap-2" role="tablist">
-                <li class="nav-item">
-                  <button class="nav-link active" id="sub-visits-tab" data-bs-toggle="pill" data-bs-target="#sub-visits" type="button" role="tab">
-                    <i class="fa-solid fa-notes-medical me-2"></i>Clinic Visit Records
-                  </button>
-                </li>
-                <li class="nav-item">
-                  <button class="nav-link" id="sub-certs-tab" data-bs-toggle="pill" data-bs-target="#sub-certs" type="button" role="tab">
-                    <i class="fa-solid fa-file-pdf me-2"></i>Medical Certs / PDFs
-                  </button>
-                </li>
-                <li class="nav-item">
-                  <button class="nav-link" id="sub-meds-tab" data-bs-toggle="pill" data-bs-target="#sub-meds" type="button" role="tab">
-                    <i class="fa-solid fa-pills me-2"></i>Ongoing Meds
-                  </button>
-                </li>
-              </ul>
-
-              <!-- SUB TAB CONTENTS -->
-              <div class="tab-content">
-                
-                <!-- 1. Treatment Logs -->
-                <div class="tab-pane fade show active" id="sub-visits" role="tabpanel">
-                  <h6 class="fw-bold text-dark mb-3 border-bottom pb-2">In-School Clinic Treatment Logs</h6>
-                  <div class="table-responsive">
-                    <table class="table table-hover border align-middle">
-                      <thead class="table-light">
-                        <tr>
-                          <th>Date / Time</th>
-                          <th>Attending Nurse</th>
-                          <th>Condition / Reason</th>
-                          <th>Action Taken & Observations</th>
-                        </tr>
-                      </thead>
-                      <tbody id="visitTableBody">
-                        <tr>
-                          <td><small class="fw-bold">July 31, 2026<br>10:00 AM</small></td>
-                          <td><strong>Nurse Jane Cruz</strong></td>
-                          <td><span class="badge bg-danger">Unconscious / Emergency</span></td>
-                          <td>Unconscious upon arrival. Checked vital signs and performed CPR. After 30 minutes, regained consciousness and rested.</td>
-                        </tr>
-                        <tr>
-                          <td><small class="fw-bold">July 15, 2026<br>01:15 PM</small></td>
-                          <td><strong>Nurse Jane Cruz</strong></td>
-                          <td><span class="badge bg-warning text-dark">Headache / Mild Fever</span></td>
-                          <td>Given Paracetamol 500mg, rested in clinic bed for 1 hour. Temperature dropped to 36.6°C.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <!-- 2. Medical Certs -->
-                <div class="tab-pane fade" id="sub-certs" role="tabpanel">
-                  <h6 class="fw-bold text-dark mb-3 border-bottom pb-2">Uploaded Certificates & Clearance Documents</h6>
-                  <div class="list-group">
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                      <div>
-                        <i class="fa-solid fa-file-pdf text-danger fa-2x me-2 align-middle"></i>
-                        <span class="fw-bold">Annual Physical Examination Clearance 2026.pdf</span>
-                        <br><small class="text-muted ms-4">Uploaded: June 10, 2026</small>
-                      </div>
-                      <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download me-1"></i> Download</button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 3. Ongoing Meds -->
-                <div class="tab-pane fade" id="sub-meds" role="tabpanel">
-                  <h6 class="fw-bold text-dark mb-3 border-bottom pb-2">Maintenance Medications & Prescriptions</h6>
-                  <table class="table table-bordered align-middle">
-                    <thead class="table-light">
-                      <tr>
-                        <th>Medication</th>
-                        <th>Dosage / Schedule</th>
-                        <th>Prescribing Doctor</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><strong>Cetirizine 10mg</strong></td>
-                        <td>1 tablet daily as needed (Allergies)</td>
-                        <td>Dr. Roberto Santos</td>
-                        <td><span class="badge bg-success">Active</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
+              <div class="table-responsive">
+                <table class="table table-hover border align-middle" id="visitsTable">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Date & Time</th>
+                      <th>Condition / Reason</th>
+                      <th>Action Taken & Observations</th>
+                      <th>Attending Nurse</th>
+                    </tr>
+                  </thead>
+                  <tbody id="visitTableBody">
+                    <tr>
+                      <td><small class="fw-bold">July 31, 2026<br>10:00 AM</small></td>
+                      <td><span class="badge bg-danger">Unconscious / Emergency</span></td>
+                      <td>Unconscious upon arrival. Checked vital signs and performed CPR. After 30 minutes, regained consciousness and rested.</td>
+                      <td><strong>Nurse Jane Cruz, RN</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- TAB 2: CLINIC PERSONNEL & HOURS -->
+      <!-- ========================================== -->
+      <!-- TAB 2: CLINIC PERSONNEL & HOURS            -->
+      <!-- ========================================== -->
       <div class="tab-pane fade" id="tab2" role="tabpanel">
         <div class="row g-4">
+          <!-- Operating Hours Card -->
           <div class="col-md-6">
             <div class="card card-pcu p-4 h-100">
-              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clock me-2"></i>Clinic Operating Hours</h5>
+              <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clock me-2"></i>Clinic Hours & Contact</h5>
               <ul class="list-group list-group-flush mb-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Monday - Friday:</strong> <span class="badge bg-primary">8:00 AM - 5:00 PM</span>
@@ -341,14 +264,16 @@
               </ul>
               <div class="mt-auto pt-2 border-top">
                 <small class="text-muted d-block"><i class="fa-solid fa-location-dot me-2 text-danger"></i><strong>Location:</strong> Main Building, 1st Floor Near Gymnasium</small>
-                <small class="text-muted d-block mt-1"><i class="fa-solid fa-phone me-2 text-success"></i><strong>Hotline:</strong> Ext. 104 / 0918-987-6543</small>
+                <small class="text-muted d-block mt-1"><i class="fa-solid fa-phone me-2 text-success"></i><strong>Landline:</strong> Ext. 104 / 0918-987-6543</small>
               </div>
             </div>
           </div>
 
+          <!-- On-Duty Personnel Card -->
           <div class="col-md-6">
             <div class="card card-pcu p-4 h-100">
               <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-doctor me-2"></i>On-Duty Clinic Personnel</h5>
+              
               <div class="d-flex align-items-center p-3 border rounded bg-light mb-3">
                 <i class="fa-solid fa-user-nurse text-primary fa-3x me-3"></i>
                 <div>
@@ -357,6 +282,7 @@
                   <span class="badge bg-success mt-1">On Duty Today</span>
                 </div>
               </div>
+
               <div class="d-flex align-items-center p-3 border rounded bg-light">
                 <i class="fa-solid fa-user-doctor text-success fa-3x me-3"></i>
                 <div>
@@ -370,13 +296,16 @@
         </div>
       </div>
 
-      <!-- TAB 3: INVENTORY MANAGEMENT -->
+      <!-- ========================================== -->
+      <!-- TAB 3: CLINIC INVENTORY MANAGEMENT        -->
+      <!-- ========================================== -->
       <div class="tab-pane fade" id="tab3" role="tabpanel">
         <div class="card card-pcu p-4">
           <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-boxes-stacked me-2"></i>Clinic Medical Supplies Inventory</h5>
-            <span class="badge bg-info text-dark">Updated Today</span>
+            <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-boxes-stacked me-2"></i>Clinic Medical Inventory & Stock</h5>
+            <span class="badge bg-success">Real-time Tracking</span>
           </div>
+
           <div class="table-responsive">
             <table class="table table-hover table-striped align-middle border">
               <thead class="table-dark" style="background-color: var(--pcu-navy);">
@@ -410,6 +339,27 @@
                   <td>15 boxes</td>
                   <td><span class="badge bg-warning text-dark">Low Stock</span></td>
                 </tr>
+                <tr>
+                  <td><code>MED-004</code></td>
+                  <td><strong>Sterile Cotton Balls</strong></td>
+                  <td>First Aid</td>
+                  <td>500 pcs</td>
+                  <td><span class="badge bg-success">In Stock</span></td>
+                </tr>
+                <tr>
+                  <td><code>MED-005</code></td>
+                  <td><strong>Adhesive Bandages (Band-Aid)</strong></td>
+                  <td>First Aid</td>
+                  <td>180 pcs</td>
+                  <td><span class="badge bg-success">In Stock</span></td>
+                </tr>
+                <tr>
+                  <td><code>MED-006</code></td>
+                  <td><strong>Alcohol 70% Isopropyl (500ml)</strong></td>
+                  <td>Sanitation</td>
+                  <td>8 bottles</td>
+                  <td><span class="badge bg-warning text-dark">Low Stock</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -419,7 +369,7 @@
     </div>
   </div>
 
-  <!-- MODAL: INCIDENT ENTRY FORM -->
+  <!-- 5. MODAL FORM: NURSE RECORD INCIDENT -->
   <div class="modal fade" id="addIncidentModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -435,21 +385,70 @@
             </div>
             <div class="mb-3">
               <label class="form-label fw-bold">Student Condition / Complaint</label>
-              <input type="text" class="form-control" id="logCondition" placeholder="e.g. Unconscious / Severe Cramps" required>
+              <input type="text" class="form-control" id="logCondition" placeholder="e.g. Unconscious, High Fever, Cuts" required>
             </div>
             <div class="mb-3">
-              <label class="form-label fw-bold">Action Taken / Meds Given</label>
-              <textarea class="form-control" id="logAction" rows="3" placeholder="e.g. Performed CPR, Checked Vitals" required></textarea>
+              <label class="form-label fw-bold">Action Taken / Clinical Remarks</label>
+              <textarea class="form-control" id="logAction" rows="3" placeholder="e.g. Performed CPR, Checked Vitals, Rested" required></textarea>
             </div>
             <div class="mb-3">
               <label class="form-label fw-bold">Attending Nurse</label>
               <input type="text" class="form-control" id="logNurse" value="Nurse Jane Cruz, RN" required>
             </div>
-            <button type="button" class="btn btn-primary w-100 fw-bold" id="btnSaveIncident">Save Record to Profile</button>
+            <button type="button" class="btn btn-primary w-100 fw-bold" onclick="saveIncident()">Save Record to Profile</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  
+  <!-- JAVASCRIPT FOR INTERACTION -->
+  <script>
+    function simulateTap() {
+      document.getElementById('waitingScreen').classList.add('d-none');
+      document.getElementById('studentProfileScreen').classList.remove('d-none');
+    }
+
+    function resetToScan() {
+      document.getElementById('studentProfileScreen').classList.add('d-none');
+      document.getElementById('waitingScreen').classList.remove('d-none');
+    }
+
+    function saveIncident() {
+      const condition = document.getElementById('logCondition').value;
+      const action = document.getElementById('logAction').value;
+      const nurse = document.getElementById('logNurse').value;
+      const time = document.getElementById('logTime').value;
+
+      if (!condition || !action) {
+        alert('Please fill out condition and action taken!');
+        return;
+      }
+
+      const tableBody = document.getElementById('visitTableBody');
+      const newRow = `
+        <tr>
+          <td><small class="fw-bold">${time}</small></td>
+          <td><span class="badge bg-danger">${condition}</span></td>
+          <td>${action}</td>
+          <td><strong>${nurse}</strong></td>
+        </tr>
+      `;
+      
+      tableBody.innerHTML = newRow + tableBody.innerHTML;
+
+      // Close Modal
+      var modalEl = document.getElementById('addIncidentModal');
+      var modal = bootstrap.Modal.getInstance(modalEl);
+      modal.hide();
+
+      // Clear Form
+      document.getElementById('logCondition').value = '';
+      document.getElementById('logAction').value = '';
+    }
+  </script>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
