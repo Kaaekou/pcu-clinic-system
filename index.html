@@ -4,9 +4,182 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PCU SHS RFID Clinic Portal</title>
-  <!-- Font Awesome for Icons -->
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f6f8;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background-color: #0b1e36;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo {
+      height: 45px;
+      width: auto;
+    }
+
+    .nav-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .university-name {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .campus-name {
+      font-size: 0.8rem;
+      color: #a0aec0;
+    }
+
+    .menu-icon {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+      padding: 5px;
+    }
+
+    /* HERO BANNER */
+    .hero-banner {
+      background: linear-gradient(180deg, #1b3858 0%, #2a4b73 100%);
+      color: white;
+      padding: 35px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .motto {
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.1rem;
+      margin-bottom: 8px;
+    }
+
+    .portal-subtext {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+
+    .clinic-logo-wrapper {
+      position: absolute;
+      right: 5%;
+    }
+
+    .hero-clinic-logo {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #c59b27;
+    }
+
+    .gold-bar {
+      height: 5px;
+      background-color: #c59b27;
+    }
+
+    /* SCANNER CARD */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .scan-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .wifi-icon {
+      color: #2563eb;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+
+    .scan-card h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+
+    .instruction {
+      color: #64748b;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    .demo-btn {
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .demo-btn:hover {
+      background-color: #1e40af;
+    }
+
+    /* Mobile Responsive adjustment */
+    @media (max-width: 600px) {
+      .hero-banner {
+        flex-direction: column;
+        padding-top: 25px;
+      }
+      .clinic-logo-wrapper {
+        position: static;
+        margin-top: 15px;
+      }
+      .university-name {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -19,7 +192,7 @@
         <span class="campus-name">Cavite Campus</span>
       </div>
     </div>
-    <div class="menu-icon">
+    <div class="menu-icon" onclick="toggleMenu()">
       <i class="fa-solid fa-bars"></i>
     </div>
   </nav>
@@ -56,10 +229,12 @@
   <script>
     function simulateScan() {
       alert("Simulated Scan Success! Loading John Cruz's Health Record...");
-      // Dito natin ikokonekta ang database load function niyo mamaya!
+    }
+
+    function toggleMenu() {
+      alert("Navigation Menu clicked!");
     }
   </script>
+
 </body>
 </html>
-     
-    
