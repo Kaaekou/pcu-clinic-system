@@ -69,7 +69,7 @@
     .nav-drawer {
       position: fixed;
       top: 0;
-      right: -280px; /* Hidden off-screen */
+      right: -280px;
       width: 280px;
       height: 100%;
       background-color: #0b1e36;
@@ -80,7 +80,7 @@
     }
 
     .nav-drawer.active {
-      right: 0; /* Slide in */
+      right: 0;
     }
 
     .drawer-header {
@@ -182,17 +182,19 @@
       background-color: #c59b27;
     }
 
-    /* SCANNER CARD */
+    /* CONTAINER & CARDS */
     .container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       padding: 40px 20px;
+      gap: 20px;
     }
 
-    .scan-card {
+    .scan-card, .student-card {
       background-color: white;
       border-radius: 12px;
-      padding: 40px 30px;
+      padding: 35px 30px;
       width: 100%;
       max-width: 600px;
       text-align: center;
@@ -215,7 +217,7 @@
       color: #64748b;
       font-size: 1rem;
       line-height: 1.5;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .demo-btn {
@@ -229,6 +231,57 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+    }
+
+    /* STUDENT PROFILE RESULT CARD (HIDDEN BY DEFAULT) */
+    .student-card {
+      display: none; /* Kakapal pag tinap ang button */
+      text-align: left;
+      border-top: 5px solid #16a34a;
+    }
+
+    .student-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .student-name {
+      font-size: 1.4rem;
+      color: #0f172a;
+      font-weight: bold;
+    }
+
+    .badge-active {
+      background-color: #dcfce7;
+      color: #15803d;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .info-row {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    .info-row strong {
+      color: #0f172a;
+    }
+
+    .reset-btn {
+      background-color: #64748b;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
     }
 
     @media (max-width: 600px) {
@@ -258,10 +311,10 @@
       <i class="fa-solid fa-xmark close-btn" onclick="toggleMenu()"></i>
     </div>
     <ul class="drawer-menu">
-      <li><a href="#"><i class="fa-solid fa-house"></i> Home / Scanner</a></li>
-      <li><a href="#"><i class="fa-solid fa-users"></i> Student Records</a></li>
-      <li><a href="#"><i class="fa-solid fa-clipboard-list"></i> Clinic Visit Logs</a></li>
-      <li><a href="#"><i class="fa-solid fa-user-doctor"></i> Medical Personnel Login</a></li>
+      <li><a href="#" onclick="showHome()"><i class="fa-solid fa-house"></i> Home / Scanner</a></li>
+      <li><a href="#" onclick="showStudentInfo()"><i class="fa-solid fa-users"></i> Student Records</a></li>
+      <li><a href="#" onclick="alert('Clinic Visit Logs feature loading...')"><i class="fa-solid fa-clipboard-list"></i> Clinic Visit Logs</a></li>
+      <li><a href="#" onclick="alert('Admin Login loading...')"><i class="fa-solid fa-user-doctor"></i> Medical Personnel Login</a></li>
     </ul>
   </div>
 
@@ -293,31 +346,64 @@
 
   <div class="gold-bar"></div>
 
-  <!-- MAIN SCANNER CARD -->
+  <!-- MAIN CONTAINER -->
   <main class="container">
-    <div class="scan-card">
+
+    <!-- 1. SCANNER STANDBY CARD -->
+    <div class="scan-card" id="scanCard">
       <div class="wifi-icon">
         <i class="fa-solid fa-wifi"></i>
       </div>
       <h2>Ready for Student ID Scan</h2>
       <p class="instruction">Please tap the PCU Student ID card on the RFID Scanner to pull up health records.</p>
       
-      <button class="demo-btn" onclick="simulateScan()">
+      <button class="demo-btn" onclick="showStudentInfo()">
         <i class="fa-solid fa-hand-pointer"></i> [Demo] Simulate Tapping John Cruz's ID
       </button>
     </div>
+
+    <!-- 2. STUDENT RECORD RESULT CARD -->
+    <div class="student-card" id="studentCard">
+      <div class="student-header">
+        <div>
+          <div class="student-name">Juan "John" Dela Cruz</div>
+          <small style="color: #64748b;">RFID Tag: <strong>E2 80 68 1A</strong></small>
+        </div>
+        <span class="badge-active">Verified Student</span>
+      </div>
+
+      <div class="info-row"><strong>Student ID:</strong> 2026-SHS-00412</div>
+      <div class="info-row"><strong>Grade & Section:</strong> Grade 12 - STEM A</div>
+      <div class="info-row"><strong>Age / Gender:</strong> 17 / Male</div>
+      <div class="info-row"><strong>Medical Conditions / Allergies:</strong> Asthma (Mild), Allergic to Penicillin</div>
+      <div class="info-row"><strong>Emergency Contact:</strong> Maria Dela Cruz (Mother) - 0917-123-4567</div>
+
+      <button class="reset-btn" onclick="showHome()"><i class="fa-solid fa-arrow-left"></i> Back to Scanner</button>
+    </div>
+
   </main>
 
   <script>
-    function simulateScan() {
-      alert("Simulated Scan Success! Loading John Cruz's Health Record...");
-    }
-
     function toggleMenu() {
       const drawer = document.getElementById('navDrawer');
       const overlay = document.getElementById('overlay');
       drawer.classList.toggle('active');
       overlay.classList.toggle('active');
+    }
+
+    function showStudentInfo() {
+      document.getElementById('scanCard').style.display = 'none';
+      document.getElementById('studentCard').style.display = 'block';
+      // Close side menu if opened
+      document.getElementById('navDrawer').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    function showHome() {
+      document.getElementById('scanCard').style.display = 'block';
+      document.getElementById('studentCard').style.display = 'none';
+      document.getElementById('navDrawer').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
     }
   </script>
 
